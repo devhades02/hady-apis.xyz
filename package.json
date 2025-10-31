@@ -1,0 +1,51 @@
+{
+  "name": "hady-apis",
+  "version": "3.0.0", 
+  "description": "🚀 Sistema Multi-API Auto-Detectable por devhades02 (Hady D'xyz) - Plataforma escalable de APIs con detección automática de plugins",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "setup": "npm install && echo '🚀 Hady APIs configurado correctamente'",
+    "reset": "rm -f db.json && npm start",
+    "test": "curl http://localhost:3000/api/status",
+    "docs": "echo '📚 Documentación: http://localhost:3000/docs'"
+  },
+  "keywords": [
+    "api",
+    "multi-api", 
+    "plugins",
+    "express",
+    "devhades02",
+    "hady-apis",
+    "auto-detect",
+    "scalable",
+    "rest-api"
+  ],
+  "author": {
+    "name": "Hady D'xyz",
+    "email": "devhades02@example.com",
+    "url": "https://github.com/devhades02"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "yt-search": "^2.10.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devhades02/hady-apis"
+  },
+  "bugs": {
+    "url": "https://github.com/devhades02/hady-apis/issues"
+  },
+  "homepage": "https://github.com/devhades02/hady-apis#readme"
+}

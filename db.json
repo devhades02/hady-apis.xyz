@@ -1,0 +1,58 @@
+{
+  "sistema": {
+    "nombre": "Hady APIs",
+    "version": "3.0",
+    "autor": "devhades02 (Hady D'xyz)",
+    "descripcion": "Sistema Multi-API Auto-Detectable"
+  },
+  "categorias": [
+    {
+      "id": "multimedia",
+      "nombre": "Multimedia",
+      "descripcion": "APIs para contenido multimedia",
+      "icono": "fas fa-play-circle",
+      "color": "#FF0000",
+      "apis": [
+        {
+          "id": "youtube-search",
+          "nombre": "YouTube Search",
+          "descripcion": "Busca videos en YouTube",
+          "endpoint": "/api/youtube",
+          "metodo": "GET",
+          "ejemplo": "/api/youtube?q=ejemplo",
+          "autor": "devhades02",
+          "version": "1.0.0",
+          "activo": true,
+          "timestamp": "2025-10-31T20:53:46.840Z"
+        }
+      ]
+    },
+    {
+      "id": "ia",
+      "nombre": "Ia",
+      "descripcion": "APIs de ia",
+      "icono": "fas fa-robot",
+      "color": "#10B981",
+      "apis": [
+        {
+          "id": "gemini-ai",
+          "nombre": "Gemini AI",
+          "descripcion": "Asistente IA potenciado por Gemini",
+          "endpoint": "/api/gemini-ai",
+          "metodo": "GET",
+          "ejemplo": "/api/gemini-ai?q=ejemplo",
+          "autor": "devhades02",
+          "version": "1.3.0",
+          "activo": true,
+          "timestamp": "2025-10-31T21:25:52.150Z"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "ultimaActualizacion": "2025-10-31T21:31:46.334Z",
+    "totalAPIs": 2,
+    "categoriasActivas": 2,
+    "totalPlugins": 0
+  }
+}

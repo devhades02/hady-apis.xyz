@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚀 Hady APIs - Panel de Control</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --secondary: #06d6a0;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --dark: #0f172a;
+      --darker: #0a0f1c;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --card-bg: #1e293b;
+      --card-hover: #334155;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--darker), var(--dark));
+      color: var(--light);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+    }
+
+    .logo-text h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-text p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      padding: 10px 20px;
+      border-radius: 50px;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background: var(--card-hover);
+    }
+
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+
+    .stat-icon.active {
+      background: rgba(6, 214, 160, 0.2);
+      color: var(--secondary);
+    }
+
+    .stat-icon.total {
+      background: rgba(139, 92, 246, 0.2);
+      color: var(--primary);
+    }
+
+    .stat-icon.inactive {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--danger);
+    }
+
+    .stat-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .stat-info p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .category-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      background: var(--card-hover);
+    }
+
+    .category-header {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .category-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .status-active {
+      background: var(--secondary);
+      box-shadow: 0 0 10px var(--secondary);
+    }
+
+    .status-inactive {
+      background: var(--danger);
+    }
+
+    .category-content {
+      padding: 20px;
+    }
+
+    .api-list {
+      list-style: none;
+    }
+
+    .api-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .api-item:last-child {
+      border-bottom: none;
+    }
+
+    .api-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .api-icon {
+      color: var(--primary);
+    }
+
+    .api-name {
+      font-weight: 600;
+    }
+
+    .api-endpoint {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    .api-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--light);
+      border: 1px solid var(--gray);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .search-bar {
+      display: flex;
+      margin-bottom: 30px;
+      background: var(--card-bg);
+      border-radius: 50px;
+      padding: 10px 20px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--light);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-bar i {
+      color: var(--gray);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      border-radius: 15px;
+      width: 90%;
+      max-width: 600px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .api-test {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .test-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .test-input input {
+      flex: 1;
+      background: var(--dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 10px 15px;
+      color: var(--light);
+    }
+
+    .test-result {
+      background: var(--dark);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      color: var(--gray);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .categories {
+        grid-template-columns: 1fr;
+      }
+      
+      header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <div class="logo-text">
+          <h1>Hady APIs</h1>
+          <p>Panel de Control Inteligente para DevHades02</p>
+        </div>
+      </div>
+      <div class="user-info">
+        <div class="user-avatar">HD</div>
+        <div>
+          <div>Hady D'xyz</div>
+          <div style="font-size: 0.8rem; color: var(--gray);">@devhades02</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Buscar API por nombre, categoría o endpoint...">
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-icon total">
+          <i class="fas fa-plug"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="total-apis">0</h3>
+          <p>Total de APIs</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon active">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="active-apis">0</h3>
+          <p>APIs Activas</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon inactive">
+          <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="inactive-apis">0</h3>
+          <p>APIs Inactivas</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon total">
+          <i class="fas fa-layer-group"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="total-categories">0</h3>
+          <p>Categorías</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="categories" id="categoriesContainer">
+      <!-- Las categorías se cargarán dinámicamente aquí -->
+    </div>
+
+    <div class="footer">
+      <p>Hady APIs &copy; 2023 - Desarrollado por DevHades02 (Hady D'xyz)</p>
+    </div>
+  </div>
+
+  <!-- Modal para probar APIs -->
+  <div class="modal" id="apiModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-vial"></i> Probar API</h2>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div id="modalBody">
+        <!-- Contenido del modal se cargará dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Base de datos simulada de APIs
+    let apisData = {
+      categories: [
+        {
+          id: "utilidades",
+          name: "Utilidades",
+          description: "APIs para tareas útiles y conversiones",
+          icon: "fas fa-tools",
+          color: "#3b82f6",
+          apis: [
+            {
+              id: "traductor",
+              name: "Traductor",
+              description: "Traduce texto entre múltiples idiomas",
+              endpoint: "/api/traductor",
+              method: "GET",
+              active: true,
+              icon: "fas fa-language"
+            },
+            {
+              id: "calculadora",
+              name: "Calculadora",
+              description: "Realiza operaciones matemáticas complejas",
+              endpoint: "/api/calculadora",
+              method: "GET",
+              active: true,
+              icon: "fas fa-calculator"
+            },
+            {
+              id: "generador-qr",
+              name: "Generador QR",
+              description: "Convierte texto o URLs en códigos QR",
+              endpoint: "/api/qr",
+              method: "GET",
+              active: false,
+              icon: "fas fa-qrcode"
+            }
+          ]
+        },
+        {
+          id: "entretenimiento",
+          name: "Entretenimiento",
+          description: "APIs para contenido divertido y entretenido",
+          icon: "fas fa-gamepad",
+          color: "#8b5cf6",
+          apis: [
+            {
+              id: "chistes",
+              name: "Chistes Aleatorios",
+              description: "Obtén chistes aleatorios para alegrar tu día",
+              endpoint: "/api/chistes",
+              method: "GET",
+              active: true,
+              icon: "fas fa-laugh"
+            },
+            {
+              id: "memes",
+              name: "Generador de Memes",
+              description: "Crea memes personalizados con tus textos",
+              endpoint: "/api/memes",
+              method: "GET",
+              active: true,
+              icon: "fas fa-grin-squint-tears"
+            }
+          ]
+        },
+        {
+          id: "informacion",
+          name: "Información",
+          description: "APIs para obtener datos y estadísticas",
+          icon: "fas fa-chart-bar",
+          color: "#06d6a0",
+          apis: [
+            {
+              id: "clima",
+              name: "Clima",
+              description: "Obtén información meteorológica actual",
+              endpoint: "/api/clima",
+              method: "GET",
+              active: true,
+              icon: "fas fa-cloud-sun"
+            },
+            {
+              id: "noticias",
+              name: "Noticias",
+              description: "Accede a las últimas noticias de diversas fuentes",
+              endpoint: "/api/noticias",
+              method: "GET",
+              active: true,
+              icon: "fas fa-newspaper"
+            }
+          ]
+        },
+        {
+          id: "ia",
+          name: "Inteligencia Artificial",
+          description: "APIs potenciadas con IA y machine learning",
+          icon: "fas fa-robot",
+          color: "#f59e0b",
+          apis: [
+            {
+              id: "chatbot",
+              name: "Chatbot",
+              description: "Interactúa con un asistente virtual inteligente",
+              endpoint: "/api/chatbot",
+              method: "POST",
+              active: true,
+              icon: "fas fa-comments"
+            },
+            {
+              id: "analisis-sentimientos",
+              name: "Análisis de Sentimientos",
+              description: "Analiza el sentimiento de un texto",
+              endpoint: "/api/sentimiento",
+              method: "POST",
+              active: false,
+              icon: "fas fa-smile"
+            }
+          ]
+        }
+      ]
+    };
+
+    // Función para cargar las categorías y APIs
+    function loadCategories() {
+      const container = document.getElementById('categoriesContainer');
+      container.innerHTML = '';
+
+      let totalApis = 0;
+      let activeApis = 0;
+      let inactiveApis = 0;
+
+      apisData.categories.forEach(category => {
+        totalApis += category.apis.length;
+        activeApis += category.apis.filter(api => api.active).length;
+        inactiveApis += category.apis.filter(api => !api.active).length;
+
+        const categoryCard = document.createElement('div');
+        categoryCard.className = 'category-card';
+        
+        const activeApisCount = category.apis.filter(api => api.active).length;
+        
+        categoryCard.innerHTML = `
+          <div class="category-header">
+            <div class="category-title">
+              <div class="category-icon" style="background: ${category.color}20; color: ${category.color}">
+                <i class="${category.icon}"></i>
+              </div>
+              <div>
+                <h3>${category.name}</h3>
+                <p>${category.description}</p>
+              </div>
+            </div>
+            <div class="status-indicator ${activeApisCount > 0 ? 'status-active' : 'status-inactive'}"></div>
+          </div>
+          <div class="category-content">
+            <ul class="api-list">
+              ${category.apis.map(api => `
+                <li class="api-item">
+                  <div class="api-info">
+                    <i class="${api.icon} api-icon"></i>
+                    <div>
+                      <div class="api-name">${api.name}</div>
+                      <div class="api-endpoint">${api.endpoint}</div>
+                    </div>
+                  </div>
+                  <div class="api-actions">
+                    <button class="btn btn-primary test-api" data-id="${api.id}" data-category="${category.id}">
+                      <i class="fas fa-vial"></i> Probar
+                    </button>
+                    <button class="btn btn-outline">
+                      <i class="fas fa-info-circle"></i>
+                    </button>
+                  </div>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+        
+        container.appendChild(categoryCard);
+      });
+
+      // Actualizar estadísticas
+      document.getElementById('total-apis').textContent = totalApis;
+      document.getElementById('active-apis').textContent = activeApis;
+      document.getElementById('inactive-apis').textContent = inactiveApis;
+      document.getElementById('total-categories').textContent = apisData.categories.length;
+
+      // Agregar event listeners a los botones de prueba
+      document.querySelectorAll('.test-api').forEach(button => {
+        button.addEventListener('click', function() {
+          const apiId = this.getAttribute('data-id');
+          const categoryId = this.getAttribute('data-category');
+          openTestModal(apiId, categoryId);
+        });
+      });
+    }
+
+    // Función para abrir el modal de prueba de API
+    function openTestModal(apiId, categoryId) {
+      const category = apisData.categories.find(cat => cat.id === categoryId);
+      const api = category.apis.find(a => a.id === apiId);
+      
+      const modal = document.getElementById('apiModal');
+      const modalBody = document.getElementById('modalBody');
+      
+      modalBody.innerHTML = `
+        <h3>${api.name}</h3>
+        <p>${api.description}</p>
+        <div class="api-details">
+          <p><strong>Endpoint:</strong> ${api.endpoint}</p>
+          <p><strong>Método:</strong> ${api.method}</p>
+          <p><strong>Estado:</strong> ${api.active ? '<span style="color: #06d6a0">Activo</span>' : '<span style="color: #ef4444">Inactivo</span>'}</p>
+        </div>
+        <div class="api-test">
+          <h4>Probar API</h4>
+          <div class="test-input">
+            <input type="text" id="testInput" placeholder="Ingresa los parámetros de prueba...">
+            <button class="btn btn-primary" id="runTest">
+              <i class="fas fa-play"></i> Ejecutar
+            </button>
+          </div>
+          <div class="test-result" id="testResult">
+            <p>Los resultados aparecerán aquí...</p>
+          </div>
+        </div>
+      `;
+      
+      modal.style.display = 'flex';
+      
+      // Event listener para ejecutar la prueba
+      document.getElementById('runTest').addEventListener('click', function() {
+        runApiTest(api, document.getElementById('testInput').value);
+      });
+    }
+
+    // Función para simular una prueba de API
+    function runApiTest(api, input) {
+      const testResult = document.getElementById('testResult');
+      testResult.innerHTML = '<p>Procesando solicitud...</p>';
+      
+      // Simular una llamada a la API (en un caso real, aquí harías fetch a tu endpoint)
+      setTimeout(() => {
+        if (api.active) {
+          const responses = {
+            traductor: `Traducción: "${input}" -> "Hello world" (Inglés)`,
+            calculadora: `Resultado: ${eval(input) || 'Expresión no válida'}`,
+            chistes: `Chiste: ¿Por qué los programadores prefieren el modo oscuro? ¡Porque la luz atrae los bugs!`,
+            memes: `Meme generado con el texto: "${input}"`,
+            clima: `Clima para "${input}": 25°C, Soleado`,
+            noticias: `Noticias sobre "${input}": Últimas noticias cargadas correctamente`,
+            chatbot: `Chatbot: Hola! Has dicho: "${input}". ¿En qué más puedo ayudarte?`
+          };
+          
+          testResult.innerHTML = `
+            <p><strong>Respuesta de la API:</strong></p>
+            <pre>${JSON.stringify({
+              status: "success",
+              data: responses[api.id] || "Respuesta simulada para: " + input,
+              timestamp: new Date().toISOString()
+            }, null, 2)}</pre>
+          `;
+        } else {
+          testResult.innerHTML = `
+            <p style="color: #ef4444"><strong>Error:</strong> Esta API está actualmente inactiva</p>
+          `;
+        }
+      }, 1000);
+    }
+
+    // Función para buscar APIs
+    function setupSearch() {
+      const searchInput = document.getElementById('searchInput');
+      
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        if (searchTerm.length === 0) {
+          loadCategories();
+          return;
+        }
+        
+        const filteredCategories = apisData.categories.map(category => {
+          const filteredApis = category.apis.filter(api => 
+            api.name.toLowerCase().includes(searchTerm) ||
+            api.description.toLowerCase().includes(searchTerm) ||
+            api.endpoint.toLowerCase().includes(searchTerm)
+          );
+          
+          return {
+            ...category,
+            apis: filteredApis
+          };
+        }).filter(category => category.apis.length > 0);
+        
+        // Mostrar categorías filtradas
+        const container = document.getElementById('categoriesContainer');
+        container.innerHTML = '';
+        
+        filteredCategories.forEach(category => {
+          const categoryCard = document.createElement('div');
+          categoryCard.className = 'category-card';
+          
+          const activeApisCount = category.apis.filter(api => api.active).length;
+          
+          categoryCard.innerHTML = `
+            <div class="category-header">
+              <div class="category-title">
+                <div class="category-icon" style="background: ${category.color}20; color: ${category.color}">
+                  <i class="${category.icon}"></i>
+                </div>
+                <div>
+                  <h3>${category.name}</h3>
+                  <p>${category.description}</p>
+                </div>
+              </div>
+              <div class="status-indicator ${activeApisCount > 0 ? 'status-active' : 'status-inactive'}"></div>
+            </div>
+            <div class="category-content">
+              <ul class="api-list">
+                ${category.apis.map(api => `
+                  <li class="api-item">
+                    <div class="api-info">
+                      <i class="${api.icon} api-icon"></i>
+                      <div>
+                        <div class="api-name">${api.name}</div>
+                        <div class="api-endpoint">${api.endpoint}</div>
+                      </div>
+                    </div>
+                    <div class="api-actions">
+                      <button class="btn btn-primary test-api" data-id="${api.id}" data-category="${category.id}">
+                        <i class="fas fa-vial"></i> Probar
+                      </button>
+                      <button class="btn btn-outline">
+                        <i class="fas fa-info-circle"></i>
+                      </button>
+                    </div>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          `;
+          
+          container.appendChild(categoryCard);
+        });
+        
+        // Agregar event listeners a los botones de prueba
+        document.querySelectorAll('.test-api').forEach(button => {
+          button.addEventListener('click', function() {
+            const apiId = this.getAttribute('data-id');
+            const categoryId = this.getAttribute('data-category');
+            openTestModal(apiId, categoryId);
+          });
+        });
+      });
+    }
+
+    // Cerrar modal
+    document.querySelector('.close-modal').addEventListener('click', function() {
+      document.getElementById('apiModal').style.display = 'none';
+    });
+
+    // Cerrar modal al hacer clic fuera de él
+    window.addEventListener('click', function(event) {
+      const modal = document.getElementById('apiModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Simular la carga de datos desde un archivo db.json
+    function loadFromDB() {
+      // En un caso real, aquí harías fetch('/db.json') para cargar los datos
+      console.log("Cargando datos de APIs...");
+      
+      // Simular una pequeña demora para la carga
+      setTimeout(() => {
+        loadCategories();
+        setupSearch();
+        console.log("APIs cargadas correctamente");
+      }, 500);
+    }
+
+    // Inicializar la aplicación
+    document.addEventListener('DOMContentLoaded', function() {
+      loadFromDB();
+    });
+  </script>
+</body>
+</html>
