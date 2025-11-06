@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hady APIs - Servicio Multi API</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+  <!-- Iconos de Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Animaciones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    
+    /* Header mejorado */
+    .header { 
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      margin-bottom: 3rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shine 3s infinite;
+    }
+    @keyframes shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    .logo { 
+      font-size: 4rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite;
+      margin-bottom: 1rem;
+    }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .subtitle { 
+      color: #b0b0b0; 
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .flag { 
+      animation: bounce 2s infinite;
+      display: inline-block;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Stats mejoradas */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .stat-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #4ecdc4;
+    }
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #4ecdc4;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Endpoints grid mejorado */
+    .endpoints-grid { 
+      display: grid; 
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    }
+    .endpoint-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .endpoint-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      border-color: rgba(78, 205, 196, 0.3);
+    }
+    .endpoint-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+    }
+    .endpoint-header { 
+      display: flex; 
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .endpoint-method {
+      background: #4ecdc4;
+      color: #000;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .endpoint-name { 
+      color: #4ecdc4;
+      font-family: 'Courier New', monospace;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+    .endpoint-description { 
+      color: #d0d0d0; 
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .parameters { 
+      background: rgba(0,0,0,0.3);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #4ecdc4;
+    }
+    .param-item { 
+      display: flex; 
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .param-item:last-child {
+      border-bottom: none;
+    }
+    .param-name { 
+      color: #ff6b6b; 
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+    }
+    .param-type { 
+      color: #4ecdc4; 
+      font-size: 0.9rem;
+      background: rgba(78, 205, 196, 0.1);
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+    }
+    .try-section { margin-top: 2rem; }
+    .input-group { margin-bottom: 1.2rem; position: relative; }
+    input {
+      padding: 1rem 1rem 1rem 3rem;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    input:focus {
+      outline: none;
+      border-color: #4ecdc4;
+      box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.2);
+    }
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #4ecdc4;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .action-btn {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .action-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    .action-btn.primary {
+      background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+      color: #000;
+    }
+    .action-btn.primary:hover {
+      box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+    }
+    .action-btn.success {
+      background: linear-gradient(45deg, #00b894, #00cec9);
+      color: #000;
+    }
+    .action-btn.success:hover {
+      box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
+    }
+    button:disabled { 
+      background: #666; 
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .result {
+      background: rgba(0,0,0,0.5);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid rgba(255,255,255,0.1);
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+    .result.show { 
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    .result.hidden {
+      display: none;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .loading { 
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid #4ecdc4;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Footer mejorado */
+    .footer {
+      text-align: center;
+      margin-top: 5rem;
+      padding: 3rem;
+      color: #888;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4ecdc4;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .social-icon:hover {
+      background: #4ecdc4;
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    /* Refresh button en mejor posición */
+    .refresh-container {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .refresh-btn {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .refresh-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .endpoints-grid {
+        grid-template-columns: 1fr;
+      }
+      .logo {
+        font-size: 2.5rem;
+      }
+      .header {
+        padding: 2rem 1rem;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header animate__animated animate__fadeInDown">
+      <div class="logo">
+        <i class="fas fa-rocket"></i> Hady APIs
+      </div>
+      <div class="subtitle">
+        <i class="fas fa-bolt"></i> Servicio Multi API 
+        <i class="fas fa-heart" style="color: #ff6b6b;"></i> Creado por Hady D'xyz (DevHades02) 
+        <span class="flag">🇵🇪</span> Perú
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card animate__animated animate__fadeInLeft">
+        <div class="stat-icon">
+          <i class="fas fa-plug"></i>
+        </div>
+        <div class="stat-value" id="total-apis">0</div>
+        <div>APIs Disponibles</div>
+      </div>
+      <div class="stat-card animate__animated animate__fadeInUp">
+        <div class="stat-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div class="stat-value" id="response-time">0ms</div>
+        <div>Tiempo Respuesta</div>
+      </div>
+      <div class="stat-card animate__animated animate__fadeInRight">
+        <div class="stat-icon">
+          <i class="fas fa-globe-americas"></i>
+        </div>
+        <div class="stat-value">🇵🇪</div>
+        <div>Desde Perú</div>
+      </div>
+    </div>
+
+    <!-- Botón de actualizar en mejor posición -->
+    <div class="refresh-container">
+      <button class="refresh-btn" onclick="refreshAllEndpoints()">
+        <i class="fas fa-sync-alt"></i> Actualizar Endpoints
+      </button>
+    </div>
+
+    <div id="endpoints-container">
+      <div style="text-align: center; padding: 4rem; color: #b0b0b0;" class="animate__animated animate__pulse animate__infinite">
+        <div class="loading" style="width: 40px; height: 40px; margin: 0 auto 1rem;"></div>
+        <div style="font-size: 1.2rem;"><i class="fas fa-sync-alt"></i> Cargando endpoints...</div>
+      </div>
+    </div>
+
+    <div class="footer animate__animated animate__fadeInUp">
+      <div class="social-icons">
+        <a href="#" class="social-icon" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="#" class="social-icon" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="social-icon" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="#" class="social-icon" title="Portfolio">
+          <i class="fas fa-briefcase"></i>
+        </a>
+      </div>
+      <div>
+        <i class="fas fa-code"></i> Hecho con <i class="fas fa-heart" style="color: #ff6b6b;"></i> desde Perú por Hady D'xyz
+      </div>
+      <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+        &copy; 2024 Hady APIs - Todos los derechos reservados
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = window.location.origin;
+
+    // Cargar endpoints automáticamente
+    async function loadEndpoints() {
+      try {
+        const startTime = Date.now();
+        const response = await fetch(`${API_BASE}/api/endpoints`);
+        const data = await response.json();
+        const responseTime = Date.now() - startTime;
+        
+        if (data.status) {
+          displayEndpoints(data.endpoints);
+          document.getElementById('total-apis').textContent = data.endpoints.length;
+          document.getElementById('response-time').textContent = `${responseTime}ms`;
+        }
+      } catch (error) {
+        document.getElementById('endpoints-container').innerHTML = `
+          <div style="text-align: center; padding: 3rem; color: #ff6b6b;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <div style="font-size: 1.2rem;">Error cargando endpoints</div>
+            <div style="color: #b0b0b0; margin-top: 0.5rem;">${error.message}</div>
+          </div>
+        `;
+      }
+    }
+
+    // Función para actualizar todo
+    async function refreshAllEndpoints() {
+      const refreshBtn = document.querySelector('.refresh-btn');
+      const originalText = refreshBtn.innerHTML;
+      
+      refreshBtn.innerHTML = '<div class="loading"></div> Actualizando...';
+      refreshBtn.disabled = true;
+      
+      await loadEndpoints();
+      
+      refreshBtn.innerHTML = originalText;
+      refreshBtn.disabled = false;
+    }
+
+    // Mostrar endpoints en la interfaz
+    function displayEndpoints(endpoints) {
+      const container = document.getElementById('endpoints-container');
+      
+      if (endpoints.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 3rem; color: #b0b0b0;">
+            <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <div style="font-size: 1.2rem;">No hay endpoints disponibles</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = '<div class="endpoints-grid"></div>';
+      const grid = container.querySelector('.endpoints-grid');
+
+      endpoints.forEach((endpoint, index) => {
+        const endpointCard = createEndpointCard(endpoint);
+        // Animación escalonada
+        endpointCard.style.animationDelay = `${index * 0.1}s`;
+        endpointCard.classList.add('animate__animated', 'animate__fadeInUp');
+        grid.appendChild(endpointCard);
+      });
+    }
+
+    // Crear tarjeta de endpoint
+    function createEndpointCard(endpoint) {
+      const card = document.createElement('div');
+      card.className = 'endpoint-card';
+      
+      card.innerHTML = `
+        <div class="endpoint-header">
+          <div class="endpoint-method">
+            <i class="fas fa-${getMethodIcon(endpoint.method)}"></i> ${endpoint.method}
+          </div>
+          <div class="endpoint-name">/api/${endpoint.name}</div>
+        </div>
+        <div class="endpoint-description">
+          <i class="fas fa-${getEndpointIcon(endpoint.name)}"></i> ${endpoint.description}
+        </div>
+        
+        ${endpoint.parameters && endpoint.parameters.length > 0 ? `
+          <div class="parameters">
+            <strong><i class="fas fa-sliders-h"></i> Parámetros:</strong>
+            ${endpoint.parameters.map(param => `
+              <div class="param-item">
+                <span class="param-name">
+                  <i class="fas fa-${getParamIcon(param.type)}"></i> ${param.name}
+                </span>
+                <span class="param-type">${param.type}${param.required ? ' <i class="fas fa-asterisk" style="color: #ff6b6b; font-size: 0.7em;"></i>' : ''}</span>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+        
+        <div class="try-section">
+          ${generateInputs(endpoint)}
+          <div class="action-buttons">
+            <button class="action-btn primary" onclick="testEndpoint('${endpoint.name}', this)">
+              <i class="fas fa-play"></i> Probar Endpoint
+            </button>
+            <button class="action-btn" onclick="toggleResult('${endpoint.name}')" id="toggle-${endpoint.name}">
+              <i class="fas fa-eye"></i> Mostrar JSON
+            </button>
+            <button class="action-btn success" onclick="copyResult('${endpoint.name}')" id="copy-${endpoint.name}">
+              <i class="fas fa-copy"></i> Copiar JSON
+            </button>
+          </div>
+          <div class="result hidden" id="result-${endpoint.name}"></div>
+        </div>
+      `;
+
+      return card;
+    }
+
+    // Iconos dinámicos
+    function getMethodIcon(method) {
+      const icons = {
+        'GET': 'download',
+        'POST': 'upload',
+        'PUT': 'edit',
+        'DELETE': 'trash'
+      };
+      return icons[method] || 'code';
+    }
+
+    function getEndpointIcon(endpointName) {
+      const icons = {
+        'music': 'music',
+        'tobase64': 'key',
+        'status': 'heartbeat',
+        'endpoints': 'list'
+      };
+      return icons[endpointName] || 'cog';
+    }
+
+    function getParamIcon(type) {
+      const icons = {
+        'string': 'font',
+        'number': 'hashtag',
+        'boolean': 'toggle-on',
+        'array': 'list'
+      };
+      return icons[type] || 'tag';
+    }
+
+    // Generar inputs dinámicamente
+    function generateInputs(endpoint) {
+      if (!endpoint.parameters || endpoint.parameters.length === 0) {
+        return '';
+      }
+
+      return endpoint.parameters.map(param => `
+        <div class="input-group">
+          <i class="fas fa-${getParamIcon(param.type)} input-icon"></i>
+          <input type="text" 
+                 id="${endpoint.name}-${param.name}" 
+                 placeholder="${param.name} (${param.type})${param.required ? ' *' : ''}"
+                 value="${param.example || ''}">
+        </div>
+      `).join('');
+    }
+
+    // Probar endpoint
+    async function testEndpoint(endpointName, button) {
+      const resultDiv = document.getElementById(`result-${endpointName}`);
+      const toggleBtn = document.getElementById(`toggle-${endpointName}`);
+      const originalText = button.innerHTML;
+      
+      // Mostrar loading
+      button.disabled = true;
+      button.innerHTML = '<div class="loading"></div> Procesando...';
+      resultDiv.classList.add('hidden');
+
+      try {
+        const params = new URLSearchParams();
+        
+        // Obtener valores de los inputs
+        const endpoint = await getEndpointInfo(endpointName);
+        if (endpoint.parameters) {
+          endpoint.parameters.forEach(param => {
+            const input = document.getElementById(`${endpointName}-${param.name}`);
+            if (input && input.value) {
+              params.append(param.name, input.value);
+            } else if (param.required) {
+              throw new Error(`Parámetro "${param.name}" es requerido`);
+            }
+          });
+        }
+
+        const url = `${API_BASE}/api/${endpointName}?${params.toString()}`;
+        const startTime = Date.now();
+        const response = await fetch(url);
+        const data = await response.json();
+        const responseTime = Date.now() - startTime;
+
+        // Actualizar tiempo de respuesta
+        document.getElementById('response-time').textContent = `${responseTime}ms`;
+
+        // Mostrar resultado
+        resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        resultDiv.classList.remove('hidden');
+        toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar JSON';
+
+      } catch (error) {
+        resultDiv.innerHTML = `
+          <div style="color: #ff6b6b;">
+            <i class="fas fa-exclamation-circle"></i> Error: ${error.message}
+          </div>
+        `;
+        resultDiv.classList.remove('hidden');
+        toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar JSON';
+      } finally {
+        // Restaurar botón
+        button.disabled = false;
+        button.innerHTML = originalText;
+      }
+    }
+
+    // Mostrar/ocultar resultado
+    function toggleResult(endpointName) {
+      const resultDiv = document.getElementById(`result-${endpointName}`);
+      const toggleBtn = document.getElementById(`toggle-${endpointName}`);
+      
+      if (resultDiv.classList.contains('hidden')) {
+        resultDiv.classList.remove('hidden');
+        toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar JSON';
+      } else {
+        resultDiv.classList.add('hidden');
+        toggleBtn.innerHTML = '<i class="fas fa-eye"></i> Mostrar JSON';
+      }
+    }
+
+    // Copiar resultado al portapapeles
+    async function copyResult(endpointName) {
+      const resultDiv = document.getElementById(`result-${endpointName}`);
+      const copyBtn = document.getElementById(`copy-${endpointName}`);
+      const originalText = copyBtn.innerHTML;
+      
+      try {
+        const text = resultDiv.querySelector('pre')?.textContent || resultDiv.textContent;
+        if (!text) {
+          throw new Error('No hay resultado para copiar');
+        }
+        
+        await navigator.clipboard.writeText(text);
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+        
+        setTimeout(() => {
+          copyBtn.innerHTML = originalText;
+        }, 2000);
+        
+      } catch (error) {
+        copyBtn.innerHTML = '<i class="fas fa-times"></i> Error';
+        setTimeout(() => {
+          copyBtn.innerHTML = originalText;
+        }, 2000);
+      }
+    }
+
+    // Obtener información de un endpoint específico
+    async function getEndpointInfo(endpointName) {
+      const response = await fetch(`${API_BASE}/api/endpoints`);
+      const data = await response.json();
+      return data.endpoints.find(e => e.name === endpointName);
+    }
+
+    // Cargar endpoints al iniciar
+    document.addEventListener('DOMContentLoaded', loadEndpoints);
+  </script>
+</body>
+</html>
