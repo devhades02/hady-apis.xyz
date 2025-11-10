@@ -46,3 +46,12 @@
   <sub>📂 Esta API lista y organiza automáticamente todos los endpoints disponibles.<br>
   Se actualiza al instante desde <code>/api/endpoint</code> y monitorea su estado desde <code>/api/status</code>.</sub>
 </p>
+
+---
+
+#### 🛠️ **Hady Herramientas y tecnologías**
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=js,python,nodejs,linux,vscode,git,github,mongodb,cloudflare,nginx,html,css" />
+</p>  
+
+---
