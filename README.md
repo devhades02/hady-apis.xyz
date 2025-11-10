@@ -47,6 +47,38 @@
   Se actualiza al instante desde <code>/api/endpoint</code> y monitorea su estado desde <code>/api/status</code>.</sub>
 </p>
 
+<h2 align="center">👤 Creador & Soporte</h2>
+
+<p align="center">
+  <a href="https://wa.me/51938714379" target="_blank">
+    <img src="https://img.shields.io/badge/WhatsApp-Hady_D'xyz-25D366?style=flat-square&logo=whatsapp&logoColor=white" alt="WhatsApp" />
+  </a>
+  <a href="https://www.instagram.com/devhades" target="_blank">
+    <img src="https://img.shields.io/badge/Instagram-@devhades-E4405F?style=flat-square&logo=instagram&logoColor=white" alt="Instagram" />
+  </a>
+  <a href="https://www.facebook.com/share/1F5Mc7Ukxc/" target="_blank">
+    <img src="https://img.shields.io/badge/Facebook-Dev_Hades-1877F2?style=flat-square&logo=facebook&logoColor=white" alt="Facebook" />
+  </a>
+  <a href="https://www.tiktok.com/@hady.xyz?_r=1&_t=ZS-91I4A5GSk5Q" target="_blank">
+    <img src="https://img.shields.io/badge/TikTok-@hady.xyz-010101?style=flat-square&logo=tiktok&logoColor=white" alt="TikTok" />
+  </a>
+  <a href="https://github.com/devhades02" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-devhades02-2C2E43?style=flat-square&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  <a href="https://www.npmjs.com/~devhades02" target="_blank">
+    <img src="https://img.shields.io/badge/NPM-devhades02-CB3837?style=flat-square&logo=npm&logoColor=white" alt="NPM" />
+  </a>
+  <a href="https://hady-apis-xyz.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Vercel-hady--apis--xyz-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel" />
+  </a>
+</p>
+
+<p align="center">
+  <sub>💎 Desarrollado con dedicación por <strong>Hady D'xyz (DevHades02)</strong><br>
+  Si disfrutas mis APIs, no olvides dejar una ⭐ en el repositorio.</sub>
+</p>
+
+
 ---
 
 #### 🛠️ **Hady Herramientas y tecnologías**
@@ -55,3 +87,14 @@
 </p>  
 
 ---
+
+
+---
+<p align="center"><sub>© 2025 Hady D’xyz — Todos los derechos reservados.</sub></p>
+
+---
+
+
+
+
+
