@@ -3,6 +3,7 @@ const yts = require('yt-search');
 /* @metadata {
   "description": "Buscar música en YouTube",
   "method": "GET", 
+  "category": "Música",
   "parameters": [
     {"name": "query", "type": "string", "required": true, "example": "los puntos del amor "}
   ]
