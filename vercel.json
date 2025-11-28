@@ -16,7 +16,7 @@
       "dest": "/index.js"
     },
     {
-      "src": "^/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|webp|mp4|webm|woff2?|ttf))$",
+      "src": "^/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|webp|mp4|webm|woff2?|ttf|mp3|wav|ogg))$",
       "dest": "/public/$1"
     },
     {
