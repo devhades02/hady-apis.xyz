@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Hady APIs • Dashboard</title>
 
 <!-- Fuentes y iconos -->
@@ -17,6 +17,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
 :root {
@@ -41,19 +45,30 @@
     --gradient: linear-gradient(135deg, #0a84ff, #5e5ce6);
 }
 
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
     background: var(--background);
     color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    line-height: 1.5;
+    touch-action: manipulation;
+    overscroll-behavior: none;
 }
 
 /* Layout principal */
 .app-container {
     display: flex;
     min-height: 100vh;
+    width: 100%;
+    position: relative;
 }
 
 /* Sidebar */
@@ -70,6 +85,20 @@ body {
     overflow-y: auto;
     transform: translateX(0);
     transition: transform 0.3s ease;
+    -webkit-overflow-scrolling: touch;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
 }
 
 .sidebar-header {
@@ -94,6 +123,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 20px;
+    flex-shrink: 0;
 }
 
 .logo-text {
@@ -103,6 +133,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    white-space: nowrap;
 }
 
 .system-info {
@@ -110,6 +141,7 @@ body {
     border-radius: 12px;
     padding: 16px;
     border: 1px solid var(--border);
+    word-break: break-word;
 }
 
 .system-info h3 {
@@ -159,6 +191,8 @@ body {
     transition: var(--transition);
     font-size: 15px;
     font-weight: 500;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .nav-link:hover {
@@ -174,6 +208,7 @@ body {
 .nav-link i {
     width: 20px;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .nav-badge {
@@ -184,6 +219,8 @@ body {
     border-radius: 10px;
     font-size: 12px;
     font-weight: 600;
+    min-width: 24px;
+    text-align: center;
 }
 
 /* Contenido principal */
@@ -191,6 +228,8 @@ body {
     flex: 1;
     margin-left: var(--sidebar-width);
     min-height: 100vh;
+    width: calc(100% - var(--sidebar-width));
+    position: relative;
 }
 
 /* Header */
@@ -207,12 +246,14 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
 }
 
 .header-left {
     display: flex;
     align-items: center;
     gap: 16px;
+    min-width: 0;
 }
 
 .menu-toggle {
@@ -226,6 +267,7 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: var(--transition);
+    flex-shrink: 0;
 }
 
 .menu-toggle:hover {
@@ -235,15 +277,19 @@ body {
 .header-title {
     font-size: 20px;
     font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .header-controls {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 }
 
-/* Botones */
+/* Botones - CORREGIDOS PARA SER 100% CLICKEABLES */
 .btn {
     padding: 10px 16px;
     border-radius: 10px;
@@ -258,6 +304,20 @@ body {
     border: none;
     font-family: 'Inter', sans-serif;
     text-decoration: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Elementos dentro de botones NO bloquean clics */
+.btn i,
+.btn span {
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
 }
 
 .btn-primary {
@@ -301,6 +361,19 @@ body {
     transition: var(--transition);
     border: 1px solid transparent;
     color: var(--text-primary);
+    flex-shrink: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Iconos dentro de btn-icon NO bloquean clics */
+.btn-icon i {
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
 }
 
 .btn-icon:hover {
@@ -311,6 +384,9 @@ body {
 /* Contenedor de contenido */
 .content-container {
     padding: 24px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* Dashboard Info */
@@ -320,6 +396,9 @@ body {
     border: 1px solid var(--border);
     padding: 24px;
     margin-bottom: 24px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .dashboard-info h2 {
@@ -339,7 +418,7 @@ body {
 
 .dashboard-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 16px;
     margin-top: 24px;
 }
@@ -350,12 +429,14 @@ body {
     padding: 16px;
     border: 1px solid var(--border);
     text-align: center;
+    min-width: 0;
 }
 
 .stat-item h3 {
     font-size: 24px;
     font-weight: 800;
     margin-bottom: 4px;
+    line-height: 1;
 }
 
 .stat-item p {
@@ -371,13 +452,18 @@ body {
     border: 1px solid var(--border);
     padding: 24px;
     margin-bottom: 24px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 24px;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 .section-title {
@@ -386,22 +472,26 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
 }
 
 .section-title i {
     color: var(--primary);
+    flex-shrink: 0;
 }
 
 .section-actions {
     display: flex;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
 /* API Cards */
 .api-cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
+    width: 100%;
 }
 
 .api-card {
@@ -411,6 +501,8 @@ body {
     border: 1px solid var(--border);
     transition: var(--transition);
     position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
 .api-card:hover {
@@ -429,6 +521,7 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    z-index: 1;
 }
 
 .method-get { background: rgba(10, 132, 255, 0.2); color: var(--primary); }
@@ -443,10 +536,12 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
 }
 
 .api-name i {
     color: var(--primary);
+    flex-shrink: 0;
 }
 
 .api-description {
@@ -454,6 +549,7 @@ body {
     font-size: 14px;
     line-height: 1.5;
     margin-bottom: 16px;
+    word-break: break-word;
 }
 
 .api-endpoint {
@@ -466,9 +562,14 @@ body {
     margin-bottom: 16px;
     word-break: break-all;
     border: 1px solid var(--border);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
 }
 
-/* Parámetros de API */
+/* Parámetros de API - INPUTS CORREGIDOS PARA PERMITIR ESCRITURA */
 .api-params {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -491,6 +592,7 @@ body {
     font-weight: 600;
     margin-bottom: 6px;
     color: var(--text-secondary);
+    word-break: break-word;
 }
 
 .param-label span {
@@ -508,6 +610,12 @@ body {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     transition: var(--transition);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+    touch-action: auto !important;
 }
 
 .param-input:focus {
@@ -519,9 +627,22 @@ body {
     color: var(--text-tertiary);
 }
 
+/* Botones de acción - CORREGIDOS PARA SER 100% CLICKEABLES */
 .api-actions {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
+}
+
+.api-actions .btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.api-actions .btn > * {
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
 }
 
 /* Response Box */
@@ -535,15 +656,30 @@ body {
     font-size: 13px;
     color: var(--text-primary);
     white-space: pre-wrap;
-    word-break: break-all;
+    word-break: break-word;
     max-height: 300px;
     overflow-y: auto;
     display: none;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 .response-box.show {
     display: block;
     animation: fadeIn 0.3s ease;
+}
+
+.response-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.response-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.response-box::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
 }
 
 .response-header {
@@ -553,22 +689,28 @@ body {
     margin-bottom: 12px;
     padding-bottom: 8px;
     border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .response-title {
     font-size: 14px;
     font-weight: 600;
     color: var(--text-secondary);
+    flex: 1;
+    min-width: 0;
 }
 
 .response-actions {
     display: flex;
     gap: 8px;
+    flex-shrink: 0;
 }
 
-/* Formularios */
+/* Formularios - INPUTS CORREGIDOS */
 .form-group {
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .form-label {
@@ -589,6 +731,12 @@ body {
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     transition: var(--transition);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+    touch-action: auto !important;
 }
 
 .form-input:focus {
@@ -600,6 +748,8 @@ body {
 .form-textarea {
     min-height: 120px;
     resize: vertical;
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
 }
 
 /* Tablas */
@@ -607,11 +757,14 @@ body {
     overflow-x: auto;
     border-radius: 12px;
     border: 1px solid var(--border);
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px;
 }
 
 thead {
@@ -625,6 +778,7 @@ th {
     font-size: 14px;
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border);
+    white-space: nowrap;
 }
 
 td {
@@ -632,13 +786,14 @@ td {
     border-bottom: 1px solid var(--border);
     color: var(--text-primary);
     font-size: 14px;
+    word-break: break-word;
 }
 
 tbody tr:hover {
     background: rgba(255, 255, 255, 0.03);
 }
 
-/* Autenticación */
+/* Autenticación - INPUTS CORREGIDOS */
 .auth-card {
     background: var(--surface);
     border-radius: 18px;
@@ -647,6 +802,7 @@ tbody tr:hover {
     max-width: 400px;
     margin: 0 auto;
     text-align: center;
+    width: 100%;
 }
 
 .auth-icon {
@@ -680,6 +836,12 @@ tbody tr:hover {
     margin-bottom: 20px;
     text-align: center;
     letter-spacing: 1px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+    touch-action: auto !important;
 }
 
 .auth-input:focus {
@@ -704,6 +866,8 @@ tbody tr:hover {
     transform: translateY(100px);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    max-width: 400px;
+    width: calc(100% - 48px);
 }
 
 .notification.show {
@@ -725,6 +889,7 @@ tbody tr:hover {
 
 .notification i {
     font-size: 20px;
+    flex-shrink: 0;
 }
 
 .notification.success i {
@@ -745,6 +910,7 @@ tbody tr:hover {
     justify-content: center;
     align-items: center;
     min-height: 300px;
+    width: 100%;
 }
 
 .spinner {
@@ -771,18 +937,21 @@ tbody tr:hover {
     to { transform: translateX(0); opacity: 1; }
 }
 
-/* Responsive */
+/* Responsive - TABLET */
 @media (max-width: 1024px) {
     .sidebar {
         transform: translateX(-100%);
+        width: 280px;
     }
     
     .sidebar.show {
         transform: translateX(0);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
     }
     
     .main-content {
         margin-left: 0;
+        width: 100%;
     }
     
     .menu-toggle {
@@ -790,13 +959,12 @@ tbody tr:hover {
     }
     
     .api-cards-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
     }
-}
-
-@media (max-width: 768px) {
-    .header-controls .btn span {
-        display: none;
+    
+    .content-container {
+        padding: 20px;
     }
     
     .section-header {
@@ -805,23 +973,281 @@ tbody tr:hover {
         gap: 16px;
     }
     
-    .dashboard-stats {
-        grid-template-columns: repeat(2, 1fr);
+    .section-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .notification {
+        left: 24px;
+        right: 24px;
+        width: auto;
+        max-width: none;
     }
 }
 
-@media (max-width: 480px) {
-    .dashboard-stats {
-        grid-template-columns: 1fr;
+/* Responsive - MOBILE */
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+    
+    .header {
+        padding: 0 16px;
+        height: 60px;
+    }
+    
+    .header-title {
+        font-size: 18px;
+    }
+    
+    .header-controls .btn span {
+        display: none;
+    }
+    
+    .header-controls .btn {
+        padding: 8px 12px;
     }
     
     .content-container {
         padding: 16px;
     }
     
+    .dashboard-info,
+    .section {
+        padding: 20px;
+        border-radius: 16px;
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .stat-item {
+        padding: 12px;
+    }
+    
+    .stat-item h3 {
+        font-size: 20px;
+    }
+    
+    .api-cards-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .api-card {
+        padding: 16px;
+    }
+    
+    .api-name {
+        font-size: 16px;
+    }
+    
+    .api-method {
+        top: 16px;
+        right: 16px;
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+    
+    .btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    
+    .btn-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
     .auth-card {
         padding: 24px;
+        margin: 0 16px;
     }
+    
+    .auth-icon {
+        font-size: 40px;
+    }
+    
+    .auth-title {
+        font-size: 22px;
+    }
+    
+    .table-container {
+        border-radius: 10px;
+    }
+    
+    th, td {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .response-box {
+        padding: 12px;
+        font-size: 12px;
+        max-height: 250px;
+    }
+}
+
+/* Responsive - MOBILE PEQUEÑO */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .section-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .api-actions {
+        flex-direction: column;
+    }
+    
+    .api-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .form-input,
+    .param-input,
+    .auth-input {
+        font-size: 16px !important; /* Evita zoom en iOS */
+    }
+    
+    .notification {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        padding: 14px;
+    }
+    
+    .sidebar {
+        width: 280px;
+    }
+}
+
+/* Responsive - DESKTOP GRANDE */
+@media (min-width: 1200px) {
+    .content-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .api-cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+/* Prevenir zoom en inputs en iOS */
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="password"],
+    textarea {
+        font-size: 16px !important;
+    }
+    
+    select,
+    button {
+        font-size: 16px;
+    }
+}
+
+/* Mejorar visibilidad del cursor en inputs */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+}
+
+/* Permitir escritura en inputs - CORRECCIÓN CLAVE */
+.param-input,
+.form-input,
+.auth-input,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"] {
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+    pointer-events: auto !important;
+    touch-action: auto !important;
+}
+
+/* Prevenir selección de texto en elementos interactivos */
+.btn,
+.btn-icon,
+.nav-link,
+.menu-toggle {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Asegurar que los botones sean 100% cliqueables */
+.btn *,
+.btn-icon * {
+    pointer-events: none;
+}
+
+/* Mejorar renderizado en dispositivos móviles */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Asegurar que las imágenes y videos no desborden */
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mejorar el scrolling en móviles */
+body {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Prevenir el pull-to-refresh en móviles */
+body {
+    overscroll-behavior-y: none;
+}
+
+/* CORRECCIÓN ESPECÍFICA: Asegurar que los inputs permitan escritura en iOS */
+@supports (-webkit-touch-callout: none) {
+    .param-input,
+    .form-input,
+    .auth-input {
+        font-size: 16px !important;
+        touch-action: auto !important;
+        -webkit-user-select: auto !important;
+        user-select: auto !important;
+    }
+}
+
+/* CORRECCIÓN ESPECÍFICA: Asegurar clics en todo el botón */
+.clickable-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background: transparent;
+    cursor: pointer;
 }
 </style>
 </head>
@@ -1050,6 +1476,62 @@ const API_CONFIG = {
 };
 
 // =======================
+// FUNCIONES GLOBALES PARA BOTONES - CORREGIDAS
+// =======================
+function executeEndpointGlobal(path, method, endpointId = null) {
+    if (window.hadyUI && window.hadyUI.executeEndpoint) {
+        window.hadyUI.executeEndpoint(path, method, endpointId);
+    } else {
+        console.error('Hady UI no está disponible');
+        showGlobalNotification('Error: Interfaz no cargada', 'error');
+    }
+}
+
+function copyToClipboardGlobal(text) {
+    if (window.hadyUI && window.hadyUI.copyToClipboard) {
+        window.hadyUI.copyToClipboard(text);
+    } else {
+        // Fallback
+        navigator.clipboard.writeText(text).then(() => {
+            showGlobalNotification('Copiado al portapapeles', 'success');
+        }).catch(err => {
+            console.error('Error al copiar: ', err);
+        });
+    }
+}
+
+function openEndpointGlobal(path) {
+    const fullUrl = window.location.origin + path;
+    window.open(fullUrl, '_blank');
+}
+
+function showGlobalNotification(message, type = 'success') {
+    const notification = document.getElementById('notification');
+    if (!notification) return;
+    
+    const icon = notification.querySelector('i');
+    const title = notification.querySelector('.notification-title');
+    const messageEl = notification.querySelector('.notification-message');
+    
+    notification.className = `notification ${type}`;
+    icon.className = `fas fa-${
+        type === 'success' ? 'check-circle' :
+        type === 'error' ? 'exclamation-circle' :
+        type === 'warning' ? 'exclamation-triangle' : 'info-circle'
+    }`;
+    title.textContent = type === 'success' ? 'Éxito' : 
+                       type === 'error' ? 'Error' : 
+                       type === 'warning' ? 'Advertencia' : 'Información';
+    messageEl.textContent = message;
+    
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 5000);
+}
+
+// =======================
 // MANEJO DE INTERFAZ
 // =======================
 class HadyAPIUI {
@@ -1058,20 +1540,78 @@ class HadyAPIUI {
         this.endpoints = [];
         this.systemInfo = null;
         this.isAuthenticated = sessionStorage.getItem('hady_authenticated') === 'true';
+        this.isMobile = this.checkIsMobile();
         this.init();
+    }
+    
+    checkIsMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
     }
     
     init() {
         this.bindEvents();
+        this.setupViewport();
         this.loadSystemInfo();
         this.loadEndpoints();
         this.setupSections();
         this.setupTheme();
+        this.setupResponsive();
+    }
+    
+    setupViewport() {
+        // Prevenir zoom automático en iOS
+        document.addEventListener('touchstart', function() {}, {passive: true});
+        
+        // Ajustar viewport para iOS
+        if (this.isMobile) {
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+            }
+        }
+    }
+    
+    setupResponsive() {
+        // Ajustar sidebar en móviles
+        if (this.isMobile) {
+            document.getElementById('sidebar').classList.remove('show');
+        }
+        
+        // Escuchar cambios de tamaño
+        window.addEventListener('resize', this.handleResize.bind(this));
+        this.handleResize();
+    }
+    
+    handleResize() {
+        const isNowMobile = window.innerWidth <= 768;
+        
+        if (isNowMobile !== this.isMobile) {
+            this.isMobile = isNowMobile;
+            
+            // Ajustar sidebar en cambio de tamaño
+            if (this.isMobile) {
+                document.getElementById('sidebar').classList.remove('show');
+            } else {
+                document.getElementById('sidebar').classList.add('show');
+            }
+        }
+        
+        // Ajustar contenedor de contenido
+        this.adjustContentContainer();
+    }
+    
+    adjustContentContainer() {
+        const contentContainer = document.getElementById('contentContainer');
+        if (contentContainer) {
+            contentContainer.style.maxWidth = '100%';
+            contentContainer.style.overflowX = 'hidden';
+        }
     }
     
     bindEvents() {
         // Toggle del sidebar en móvil
-        document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('menuToggle').addEventListener('click', (e) => {
+            e.stopPropagation();
             document.getElementById('sidebar').classList.toggle('show');
         });
         
@@ -1083,7 +1623,7 @@ class HadyAPIUI {
                 this.showSection(section);
                 
                 // Cerrar sidebar en móvil
-                if (window.innerWidth < 1024) {
+                if (this.isMobile) {
                     document.getElementById('sidebar').classList.remove('show');
                 }
             });
@@ -1109,13 +1649,20 @@ class HadyAPIUI {
             const sidebar = document.getElementById('sidebar');
             const menuToggle = document.getElementById('menuToggle');
             
-            if (window.innerWidth < 1024 && 
+            if (this.isMobile && 
                 !sidebar.contains(e.target) && 
                 !menuToggle.contains(e.target) &&
                 sidebar.classList.contains('show')) {
                 sidebar.classList.remove('show');
             }
         });
+        
+        // CORRECCIÓN: No prevenir comportamiento por defecto en inputs
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     }
     
     async loadSystemInfo() {
@@ -1128,15 +1675,13 @@ class HadyAPIUI {
             
             this.systemInfo = data;
             
-            // Actualizar la información del sistema en el sidebar
             document.getElementById('system-info-text').innerHTML = `
                 <strong>${data.project || 'Hady APIs'}</strong><br>
                 Creador: ${data.creator || 'Hady D\'xyz'}<br>
                 Estado: <span style="color: #32d74b;">● online</span><br>
-                vip: si 
+                Vip: <span style="color: #32d74b;"> Si</span><br>
             `;
             
-            // Actualizar las estadísticas del dashboard
             document.getElementById('totalApis').textContent = data.endpoints || 0;
             document.getElementById('responseTime').textContent = '142ms';
             
@@ -1162,7 +1707,6 @@ class HadyAPIUI {
             }
             const data = await response.json();
             
-            // Manejar diferentes formatos de respuesta
             let endpoints = [];
             if (Array.isArray(data)) {
                 endpoints = data;
@@ -1176,11 +1720,9 @@ class HadyAPIUI {
             
             this.endpoints = endpoints;
             
-            // Actualizar contador en navegación
             document.getElementById('apis-count').textContent = endpoints.length;
             document.getElementById('totalApis').textContent = endpoints.length;
             
-            // Mostrar endpoints
             this.renderEndpoints(endpoints, container);
             
         } catch (error) {
@@ -1234,10 +1776,8 @@ class HadyAPIUI {
             const category = endpoint.category || metadata.category || 'General';
             const params = endpoint.params || metadata.params || [];
             
-            // Crear un ID único para este endpoint
             const endpointId = `endpoint-${path.replace(/[^a-zA-Z0-9]/g, '-')}`;
             
-            // Generar HTML para parámetros si los hay
             let paramsHtml = '';
             if (params.length > 0) {
                 paramsHtml = '<div class="api-params">';
@@ -1254,7 +1794,9 @@ class HadyAPIUI {
                                    class="param-input" 
                                    data-param="${param.name}" 
                                    placeholder="${param.example || ''}" 
-                                   ${param.required ? 'required' : ''}>
+                                   ${param.required ? 'required' : ''}
+                                   inputmode="text"
+                                   autocomplete="off">
                         </div>
                     `;
                 });
@@ -1285,20 +1827,20 @@ class HadyAPIUI {
                     ${paramsHtml}
                     
                     <div class="api-actions">
-                        <button class="btn btn-primary" onclick="hadyUI.executeEndpoint('${path}', '${method}', '${endpointId}')">
+                        <button class="btn btn-primary" onclick="executeEndpointGlobal('${path}', '${method}', '${endpointId}')">
                             <i class="fas fa-play"></i>
                             Probar API
                         </button>
-                        <button class="btn btn-secondary" onclick="hadyUI.copyToClipboard('${API_CONFIG.baseURL}${path}')">
+                        <button class="btn btn-secondary" onclick="copyToClipboardGlobal('${API_CONFIG.baseURL}${path}')">
                             <i class="fas fa-copy"></i>
                             Copiar URL
                         </button>
-                        <button class="btn btn-secondary" onclick="window.open('${path}', '_blank')">
+                        <button class="btn btn-secondary" onclick="openEndpointGlobal('${path}')">
                             <i class="fas fa-external-link-alt"></i>
                             Abrir
                         </button>
                     </div>
-                    
+                                 
                     <div class="response-box" id="response-${endpointId}"></div>
                 </div>
             `;
@@ -1306,10 +1848,40 @@ class HadyAPIUI {
         
         html += '</div>';
         container.innerHTML = html;
+        
+        // CORRECCIÓN: Asegurar que los inputs sean escribibles
+        this.fixInputs();
+    }
+    
+    // CORRECCIÓN: Función para arreglar inputs
+    fixInputs() {
+        document.querySelectorAll('.param-input').forEach(input => {
+            // Remover cualquier atributo que impida escritura
+            input.style.pointerEvents = 'auto';
+            input.style.userSelect = 'auto';
+            input.style.webkitUserSelect = 'auto';
+            
+            // Permitir eventos de toque
+            input.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+            
+            input.addEventListener('touchend', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+            
+            input.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.focus();
+            });
+        });
     }
     
     async executeEndpoint(path, method = "GET", endpointId = null) {
-        // Si no se proporciona endpointId, intentar crearlo desde el path
+        if (this.isMobile) {
+            document.activeElement?.blur();
+        }
+        
         if (!endpointId) {
             endpointId = `endpoint-${path.replace(/[^a-zA-Z0-9]/g, '-')}`;
         }
@@ -1322,7 +1894,7 @@ class HadyAPIUI {
             return;
         }
         
-        // Verificar si hay parámetros requeridos
+        // Verificar parámetros requeridos
         const paramInputs = card.querySelectorAll('.param-input[required]');
         let missingParams = [];
         
@@ -1335,7 +1907,6 @@ class HadyAPIUI {
         if (missingParams.length > 0) {
             this.showNotification(`Faltan parámetros requeridos: ${missingParams.join(', ')}`, 'warning');
             
-            // Resaltar los campos faltantes
             paramInputs.forEach(input => {
                 if (!input.value.trim()) {
                     input.style.borderColor = 'var(--danger)';
@@ -1364,7 +1935,6 @@ class HadyAPIUI {
             }
         });
         
-        // Agregar parámetros a la URL
         if (Object.keys(params).length > 0) {
             const queryString = new URLSearchParams(params).toString();
             url += '?' + queryString;
@@ -1396,7 +1966,6 @@ class HadyAPIUI {
             }
             
             if (response.ok) {
-                // Formatear JSON con colores
                 const jsonStr = JSON.stringify(responseData, null, 2);
                 const formattedJson = this.syntaxHighlight(jsonStr);
                 
@@ -1483,12 +2052,10 @@ class HadyAPIUI {
     }
     
     showSection(sectionId) {
-        // Ocultar todas las secciones
         document.querySelectorAll('.section, .dashboard-info').forEach(section => {
             section.style.display = 'none';
         });
         
-        // Mostrar sección seleccionada
         if (sectionId === 'dashboard') {
             document.getElementById('dashboardSection').style.display = 'block';
             document.querySelectorAll('.section')[0].style.display = 'block';
@@ -1496,7 +2063,6 @@ class HadyAPIUI {
             document.getElementById(`${sectionId}Section`).style.display = 'block';
         }
         
-        // Actualizar navegación activa
         document.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('data-section') === sectionId) {
@@ -1504,7 +2070,6 @@ class HadyAPIUI {
             }
         });
         
-        // Actualizar título de página
         const titleMap = {
             'dashboard': 'Dashboard',
             'apis': 'Todas las APIs',
@@ -1515,17 +2080,14 @@ class HadyAPIUI {
         
         document.getElementById('pageTitle').textContent = titleMap[sectionId] || 'Dashboard';
         
-        // Cargar contenido específico de la sección
         this.loadSectionContent(sectionId);
-        
-        // Actualizar sección actual
         this.currentSection = sectionId;
+        this.adjustContentContainer();
     }
     
     loadSectionContent(sectionId) {
         switch(sectionId) {
             case 'dashboard':
-                // Ya está cargado
                 break;
             case 'apis':
                 this.loadAllAPIs();
@@ -1547,13 +2109,11 @@ class HadyAPIUI {
         section.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
         
         try {
-            // Si ya tenemos endpoints cargados, usarlos
             if (this.endpoints.length > 0) {
                 this.renderAllAPIsTable(section);
                 return;
             }
             
-            // Si no, cargarlos
             const response = await fetch(API_CONFIG.endpoints.endpoints);
             if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -1636,13 +2196,13 @@ class HadyAPIUI {
                         <td>${category}</td>
                         <td>${params.length > 0 ? params.map(p => p.name).join(', ') : 'Ninguno'}</td>
                         <td>
-                            <button class="btn-icon" onclick="hadyUI.executeEndpoint('${path}', '${method}')" title="Probar">
+                            <button class="btn-icon" onclick="executeEndpointGlobal('${path}', '${method}')" title="Probar">
                                 <i class="fas fa-play"></i>
                             </button>
-                            <button class="btn-icon" onclick="hadyUI.copyToClipboard('${API_CONFIG.baseURL}${path}')" title="Copiar">
+                            <button class="btn-icon" onclick="copyToClipboardGlobal('${API_CONFIG.baseURL}${path}')" title="Copiar">
                                 <i class="fas fa-copy"></i>
                             </button>
-                            <button class="btn-icon" onclick="window.open('${path}', '_blank')" title="Abrir">
+                            <button class="btn-icon" onclick="openEndpointGlobal('${path}')" title="Abrir">
                                 <i class="fas fa-external-link-alt"></i>
                             </button>
                         </td>
@@ -1707,35 +2267,6 @@ class HadyAPIUI {
                     
                     <h4 style="margin-top: 20px; color: var(--text-primary);">3. Validación de parámetros</h4>
                     <p>El sistema valida automáticamente que todos los parámetros requeridos estén completos antes de enviar la solicitud. Si falta algún parámetro, verás un mensaje de advertencia.</p>
-                    
-                    <h4 style="margin-top: 20px; color: var(--text-primary);">4. APIs disponibles con parámetros</h4>
-                    <p>Actualmente, las siguientes APIs requieren parámetros:</p>
-                    
-                    <div style="margin-top: 16px;">
-                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; padding: 12px; background: rgba(0,0,0,0.1); border-radius: 8px;">
-                            <i class="fas fa-robot" style="color: var(--primary);"></i>
-                            <div>
-                                <strong>ChatGPT</strong>
-                                <div style="font-size: 13px; color: var(--text-secondary);">Parámetros: model, msg</div>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; padding: 12px; background: rgba(0,0,0,0.1); border-radius: 8px;">
-                            <i class="fas fa-language" style="color: var(--primary);"></i>
-                            <div>
-                                <strong>Traductor</strong>
-                                <div style="font-size: 13px; color: var(--text-secondary);">Parámetros: text, target, source (opcional)</div>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(0,0,0,0.1); border-radius: 8px;">
-                            <i class="fas fa-image" style="color: var(--primary);"></i>
-                            <div>
-                                <strong>Generador de Imágenes</strong>
-                                <div style="font-size: 13px; color: var(--text-secondary);">Parámetros: prompt, size (opcional), style (opcional)</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         `;
@@ -1776,11 +2307,6 @@ class HadyAPIUI {
                     <small style="color: var(--text-secondary);">Ingresa los parámetros en formato JSON</small>
                 </div>
                 
-                <div class="form-group">
-                    <label class="form-label">Headers Personalizados</label>
-                    <textarea class="form-input form-textarea" id="testerHeaders" placeholder='Content-Type: application/json\nAuthorization: Bearer token' rows="3"></textarea>
-                </div>
-                
                 <div style="display: flex; gap: 12px;">
                     <button class="btn btn-primary" onclick="hadyUI.runTest()">
                         <i class="fas fa-play"></i>
@@ -1800,13 +2326,11 @@ class HadyAPIUI {
     loadSettings() {
         const section = document.getElementById('settingsSection');
         
-        // Verificar autenticación
         if (!this.isAuthenticated && API_CONFIG.auth.required) {
             section.innerHTML = this.getAuthForm();
             return;
         }
         
-        // Mostrar configuración si está autenticado
         section.innerHTML = `
             <div class="section-header">
                 <h2 class="section-title"><i class="fas fa-cog"></i> Configuración del Sistema</h2>
@@ -1888,7 +2412,6 @@ class HadyAPIUI {
             </div>
         `;
         
-        // Cargar configuración guardada
         this.loadSavedSettings();
     }
     
@@ -1913,13 +2436,6 @@ class HadyAPIUI {
                         Cancelar
                     </button>
                 </div>
-                
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
-                    <p style="font-size: 12px; color: var(--text-tertiary); text-align: center;">
-                        <i class="fas fa-info-circle"></i>
-                        La autenticación protege los ajustes del sistema
-                    </p>
-                </div>
             </div>
         `;
     }
@@ -1933,7 +2449,6 @@ class HadyAPIUI {
             return;
         }
         
-        // Verificar contraseña o key
         if (enteredPassword === API_CONFIG.auth.password || enteredPassword === API_CONFIG.auth.key) {
             this.isAuthenticated = true;
             sessionStorage.setItem('hady_authenticated', 'true');
@@ -2018,7 +2533,6 @@ class HadyAPIUI {
     }
     
     setupAutoRefresh(enabled) {
-        // Limpiar cualquier intervalo anterior
         if (this.autoRefreshInterval) {
             clearInterval(this.autoRefreshInterval);
         }
@@ -2029,7 +2543,7 @@ class HadyAPIUI {
                     this.loadSystemInfo();
                     this.loadEndpoints();
                 }
-            }, 30000); // 30 segundos
+            }, 30000);
         }
     }
     
@@ -2037,7 +2551,6 @@ class HadyAPIUI {
         const savedTheme = localStorage.getItem('hadyTheme') || 'dark';
         this.applyTheme(savedTheme);
         
-        // Configurar auto-refresh
         const autoRefresh = localStorage.getItem('hadyAutoRefresh') !== 'false';
         this.setupAutoRefresh(autoRefresh);
     }
@@ -2057,7 +2570,6 @@ class HadyAPIUI {
             this.showNotification('Copiado al portapapeles', 'success');
         } catch (error) {
             console.error('Error copiando al portapapeles:', error);
-            // Fallback para navegadores antiguos
             const textArea = document.createElement('textarea');
             textArea.value = text;
             document.body.appendChild(textArea);
@@ -2095,7 +2607,6 @@ class HadyAPIUI {
     async scanAPIs() {
         this.showNotification('Escaneando nuevas APIs...', 'info');
         
-        // Simular escaneo (en un sistema real, esto llamaría a un endpoint de escaneo)
         setTimeout(() => {
             this.showNotification('Escaneo completado. Recargando endpoints...', 'success');
             this.loadEndpoints();
@@ -2140,7 +2651,6 @@ class HadyAPIUI {
     }
     
     showNotification(message, type = 'success') {
-        // Verificar si las notificaciones están habilitadas
         const showNotifications = localStorage.getItem('hadyShowNotifications') !== 'false';
         if (!showNotifications && type !== 'error') return;
         
@@ -2149,7 +2659,6 @@ class HadyAPIUI {
         const title = notification.querySelector('.notification-title');
         const messageEl = notification.querySelector('.notification-message');
         
-        // Configurar notificación
         notification.className = `notification ${type}`;
         icon.className = `fas fa-${
             type === 'success' ? 'check-circle' :
@@ -2161,17 +2670,14 @@ class HadyAPIUI {
                            type === 'warning' ? 'Advertencia' : 'Información';
         messageEl.textContent = message;
         
-        // Mostrar notificación
         notification.classList.add('show');
         
-        // Ocultar después de 5 segundos
         setTimeout(() => {
             notification.classList.remove('show');
         }, 5000);
     }
     
     setupSections() {
-        // Cargar documentación y probador por defecto
         this.loadDocumentation();
         this.loadTester();
     }
@@ -2188,17 +2694,14 @@ class HadyAPIUI {
             return;
         }
         
-        // Asegurarse de que la URL comience con /
         if (!url.startsWith('/')) {
             url = '/' + url;
         }
         
-        // Mostrar loading
         responseBox.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--text-secondary);"><i class="fas fa-spinner fa-spin"></i> Ejecutando prueba...</div>';
         responseBox.classList.add('show');
         
         try {
-            // Parsear parámetros
             let params = {};
             if (paramsText) {
                 try {
@@ -2209,14 +2712,12 @@ class HadyAPIUI {
                 }
             }
             
-            // Construir URL con parámetros
             let fullUrl = url;
             if (Object.keys(params).length > 0) {
                 const queryString = new URLSearchParams(params).toString();
                 fullUrl += '?' + queryString;
             }
             
-            // Parsear headers
             const headers = {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -2246,7 +2747,6 @@ class HadyAPIUI {
                 responseData = { text: await response.text() };
             }
             
-            // Formatear respuesta
             const jsonStr = JSON.stringify(responseData, null, 2);
             const formattedJson = this.syntaxHighlight(jsonStr);
             
@@ -2298,18 +2798,17 @@ class HadyAPIUI {
     }
 }
 
-// Inicializar la aplicación
-const hadyUI = new HadyAPIUI();
+// =======================
+// INICIALIZACIÓN
+// =======================
 
-// Hacer disponible globalmente para eventos onclick
+const hadyUI = new HadyAPIUI();
 window.hadyUI = hadyUI;
 
-// Cerrar notificación al hacer clic
 document.getElementById('notification').addEventListener('click', function() {
     this.classList.remove('show');
 });
 
-// Cargar sección desde hash de URL si existe
 window.addEventListener('DOMContentLoaded', () => {
     const hash = window.location.hash.substring(1);
     if (hash && ['dashboard', 'apis', 'documentation', 'tester', 'settings'].includes(hash)) {
@@ -2317,14 +2816,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Actualizar hash de URL al cambiar sección
 const originalShowSection = hadyUI.showSection.bind(hadyUI);
 hadyUI.showSection = function(sectionId) {
     originalShowSection(sectionId);
     window.location.hash = sectionId;
 };
 
-// Permitir enviar formularios con Enter
 document.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         if (e.target.id === 'authPassword') {
@@ -2332,6 +2829,41 @@ document.addEventListener('keypress', function(e) {
         }
     }
 });
+
+// CORRECCIÓN: Permitir escritura en inputs
+document.addEventListener('touchstart', function(event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
+// CORRECCIÓN: Asegurar clics en botones
+document.addEventListener('click', function(e) {
+    // Si el clic fue en un icono dentro de un botón, disparar el clic del botón
+    if (e.target.tagName === 'I' && e.target.closest('.btn, .btn-icon')) {
+        const button = e.target.closest('.btn, .btn-icon');
+        if (button.onclick) {
+            button.onclick(e);
+        } else if (button.getAttribute('onclick')) {
+            try {
+                eval(button.getAttribute('onclick'));
+            } catch (error) {
+                console.error('Error ejecutando onclick:', error);
+            }
+        }
+    }
+});
+
+// CORRECCIÓN: Solución final para inputs en iOS
+if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    document.addEventListener('touchstart', function(e) {
+        if (e.target.classList.contains('param-input') || 
+            e.target.classList.contains('form-input') ||
+            e.target.classList.contains('auth-input')) {
+            e.target.focus();
+        }
+    }, { passive: true });
+}
 </script>
 </body>
 </html>
