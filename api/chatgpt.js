@@ -5,13 +5,12 @@ const metadata = `
 {
     "name": "ChatGPT",
     "icon": "fa-solid fa-robot",
-    "description": "Genera respuestas usando modelos GPT permitidos.",
+    "description": "Genera respuestas usando Open AI chatgpt.",
     "method": "GET",
     "category": "IA",
-    "example": "/api/chatgpt?model=gpt-4o-mini&msg=Hola",
+    "example": "/api/chatgpt?msg=Hola",
     "params": [
-        {"name": "model", "type": "string", "required": true, "example": "gpt-4o-mini"},
-        {"name": "msg", "type": "string", "required": true, "example": "Hola, explícame la física cuántica"}
+        { "name": "msg", "type": "string", "required": true, "example": "Hola, explícame la física cuántica" }
     ]
 }
 `;
@@ -23,34 +22,21 @@ const axios = require("axios");
 
 module.exports = async (req, res) => {
 
-    const { model, msg } = req.query;
+    const { msg } = req.query;
 
-    if (!model || !msg) {
+    if (!msg) {
         return res.json({
             success: false,
             status_code: 400,
             creator: "Hady D'xyz",
-            message: "Parámetros requeridos: ?model=gpt-4o-mini&msg=Hola"
+            message: "Parámetro requerido: ?msg=Hola"
         });
     }
 
     try {
 
-        const modelosPermitidos = [
-            "gpt-3.5-turbo",
-            "gpt-3.5-turbo-0125",
-            "gpt-4o-mini",
-            "gpt-4o"
-        ];
-
-        if (!modelosPermitidos.includes(model)) {
-            return res.json({
-                success: false,
-                status_code: 400,
-                creator: "Hady D'xyz",
-                message: "Modelo inválido. Modelos permitidos: " + modelosPermitidos.join(", ")
-            });
-        }
+        // Modelo Fijo
+        const model = "gpt-3.5-turbo-0125";
 
         const payload = {
             messages: [
