@@ -9,68 +9,89 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(require('cors')());
 
-// Función para cargar endpoints automáticamente
+// ================================
+// FUNCIÓN PARA CARGAR ENDPOINTS
+// ================================
 function loadEndpoints() {
   const endpoints = [];
   const apiDir = path.join(__dirname, 'api');
-  
-  if (fs.existsSync(apiDir)) {
-    const files = fs.readdirSync(apiDir);
-    
-    files.forEach(file => {
-      if (file.endsWith('.js')) {
-        const endpointName = file.replace('.js', '');
-        const endpointPath = `/api/${endpointName}`;
-        
-        try {
-          // Cargar el endpoint
-          const endpointHandler = require(`./api/${file}`);
-          app.get(endpointPath, endpointHandler);
-          
-          // Obtener metadata del endpoint
-          let description = `Endpoint ${endpointName}`;
-          let method = "GET";
-          let parameters = [];
-          
-          // Intentar obtener metadata del archivo
-          try {
-            const endpointCode = fs.readFileSync(path.join(apiDir, file), 'utf8');
-            const metaMatch = endpointCode.match(/\/\*\s*@metadata\s*({[\s\S]*?})\s*\*\//);
-            if (metaMatch) {
-              const metadata = JSON.parse(metaMatch[1]);
-              description = metadata.description || description;
-              method = metadata.method || method;
-              parameters = metadata.parameters || parameters;
-            }
-          } catch (e) {}
-          
-          endpoints.push({
-            name: endpointName,
-            method: method,
-            description: description,
-            path: endpointPath,
-            parameters: parameters
-          });
-          
-          console.log(`✅ Endpoint cargado: ${endpointPath}`);
-        } catch (error) {
-          console.log(`❌ Error cargando ${endpointPath}:`, error.message);
+
+  if (!fs.existsSync(apiDir)) return endpoints;
+
+  const files = fs.readdirSync(apiDir).filter(f => f.endsWith('.js'));
+
+  files.forEach(file => {
+    const endpointName = file.replace('.js', '');
+    const endpointPath = `/api/${endpointName}`;
+
+    try {
+      const endpointHandler = require(`./api/${file}`);
+      app.get(endpointPath, endpointHandler);
+
+      let meta = {
+        name: endpointName,
+        icon: "fa-solid fa-code",
+        description: `Endpoint ${endpointName}`,
+        method: "GET",
+        category: "General",
+        example: null,
+        params: []
+      };
+
+      try {
+        const code = fs.readFileSync(path.join(apiDir, file), "utf8");
+
+        const match = code.match(/const metadata\s*=\s*`([\s\S]*?)`/);
+        if (match) {
+          const parsed = JSON.parse(match[1]);
+
+          meta = {
+            name: parsed.name || meta.name,
+            icon: parsed.icon || meta.icon,
+            description: parsed.description || meta.description,
+            method: parsed.method || meta.method,
+            category: parsed.category || meta.category,
+            example: parsed.example
+              ? `https://hady-apis-xyz.vercel.app${parsed.example}`
+              : null,
+            params: parsed.params || []
+          };
         }
+      } catch (e) {
+        console.log(`⚠ Metadata inválida en ${file}`);
       }
-    });
-  }
-  
+
+      endpoints.push({
+        file,
+        name: meta.name,
+        icon: meta.icon,
+        method: meta.method,
+        description: meta.description,
+        category: meta.category,
+        path: endpointPath,
+        example: meta.example,
+        params: meta.params
+      });
+
+      console.log(`✅ Endpoint cargado: ${endpointPath}`);
+
+    } catch (error) {
+      console.log(`❌ Error cargando ${endpointPath}:`, error.message);
+    }
+  });
+
   return endpoints;
 }
 
-// Cargar endpoints al iniciar
+// Cargar endpoints iniciales
 let availableEndpoints = loadEndpoints();
 
-// Endpoint dinámico para lista de APIs
+// ================================
+// LISTA DE ENDPOINTS
+// ================================
 app.get('/api/endpoints', (req, res) => {
-  // Recargar endpoints en cada solicitud para detectar cambios
   availableEndpoints = loadEndpoints();
-  
+
   res.json({
     status: true,
     creator: "Hady D'xyz",
@@ -80,33 +101,35 @@ app.get('/api/endpoints', (req, res) => {
   });
 });
 
-// Endpoint de status
+// ================================
+// STATUS
+// ================================
 app.get('/api/status', (req, res) => {
   const now = new Date();
+
   res.json({
     status: true,
     status_code: 200,
     service: "Hady APIs",
-    creator: "Hady D'xyz", 
-    developer: "DevHades02",
-    country: "Perú",
+    creator: "Hady D'xyz",
     status_message: "Active",
     server_time: now.toISOString(),
-    local_time: now.toLocaleString("es-PE", { timeZone: "America/Lima" }),
     total_endpoints: availableEndpoints.length,
     endpoints: availableEndpoints.map(e => e.name)
   });
 });
 
-// Ruta principal
+// ================================
+// RUTA PRINCIPAL
+// ================================
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Iniciar servidor
+// ================================
+// SERVIDOR
+// ================================
 app.listen(port, () => {
-  console.log(`🚀 Hady APIs running on http://localhost:${port}`);
-  console.log(`👨‍💻 Creator: Hady D'xyz (DevHades02) - Perú`);
-  console.log(`📊 Endpoints cargados: ${availableEndpoints.length}`);
-  console.log(`🌍 País: Perú (America/Lima)`);
+  console.log(`🚀 Hady APIs corriendo en http://localhost:${port}`);
+  console.log(`👨‍💻 Creator: Hady D'xyz (DevHades02)`);
 });
