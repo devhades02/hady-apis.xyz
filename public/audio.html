@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hady Audio</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:radial-gradient(circle at top,#1c1c22,#000);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+}
+.card{
+  width:260px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 30px 60px rgba(0,0,0,.6);
+  text-align:center;
+}
+.icon{
+  font-size:28px;
+  color:white;
+  opacity:.9;
+  margin-bottom:8px;
+}
+.title{
+  font-size:13px;
+  color:white;
+  opacity:.8;
+  margin-bottom:14px;
+}
+audio{
+  width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="icon"><i class="fa-solid fa-headphones"></i></div>
+  <div class="title">Hady Audio</div>
+  <audio controls>
+    <source src="/test.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+if("mediaSession" in navigator){
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title:"Hady Audio",
+    artist:"DevHades02"
+  });
+}
+</script>
+
+</body>
+</html>

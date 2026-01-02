@@ -1,0 +1,3138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- ======= META PREVIEW UNIVERSAL ======= -->
+
+<!-- SEO -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hady APIs • dashboard</title>
+<meta name="description" content="Colección poderosa de APIs rápidas, modernas y gratis creadas por Hady D'xyz. Compatible con bots, apps y proyectos.">
+
+<!-- Open Graph (Facebook, WhatsApp, Discord, Telegram) -->
+<meta property="og:title" content="Hady APIs • Dashboard">
+<meta property="og:description" content="Colección poderosa de APIs rápidas, modernas y gratis creadas por Hady D'xyz.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hady-apis-xyz.vercel.app/#dashboard">
+<meta property="og:image" content="https://i.postimg.cc/7L1WS4mw/pexels-dev-hades-2157899298-35034281.jpeg"> <!-- EJEMPLO -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+<!-- Para WhatsApp / Discord -->
+<meta property="og:site_name" content="Hady APIs">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hady APIs • Dashboard">
+<meta name="twitter:description" content="Colección poderosa de APIs rápidas, modernas y gratis creadas por Hady D'xyz.">
+<meta name="twitter:image" content="https://i.postimg.cc/7L1WS4mw/pexels-dev-hades-2157899298-35034281.jpeg"> <!-- EJEMPLO -->
+
+<!-- Color en Android / navegadores -->
+<meta name="theme-color" content="#0d0d0d">
+
+<!-- Favicon -->
+<link rel="icon" href="https://i.postimg.cc/0NLHgQjC/Gemini-Generated-Image-cl409kcl409kcl40.png">
+
+
+
+
+<title>Hady APIs • Dashboard</title>
+
+<!-- Fuentes y iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+:root {
+    --primary: #0a84ff;
+    --primary-light: #64d2ff;
+    --secondary: #5e5ce6;
+    --danger: #ff453a;
+    --success: #32d74b;
+    --warning: #ff9f0a;
+    --background: #000000;
+    --surface: #1c1c1e;
+    --surface-light: #2c2c2e;
+    --surface-dark: #121214;
+    --border: #38383a;
+    --text-primary: #f5f5f7;
+    --text-secondary: #98989d;
+    --text-tertiary: #6c6c70;
+    --sidebar-width: 280px;
+    --header-height: 70px;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --gradient: linear-gradient(135deg, #0a84ff, #5e5ce6);
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.5;
+    touch-action: manipulation;
+    overscroll-behavior: none;
+}
+
+/* Layout principal */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--surface-dark);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+    -webkit-overflow-scrolling: touch;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+
+.sidebar-header {
+    padding: 0 24px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+}
+
+.system-info {
+    
+    word-break: break-word;
+}
+
+.system-info h3 {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.system-info p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.nav-menu {
+    padding: 0 24px;
+}
+
+.nav-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.nav-items {
+    list-style: none;
+    margin-bottom: 32px;
+}
+
+.nav-item {
+    margin-bottom: 8px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 15px;
+    font-weight: 500;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.nav-link.active {
+    background: var(--primary);
+    color: white;
+}
+
+.nav-link i {
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.nav-badge {
+    margin-left: auto;
+    background: var(--surface-light);
+    color: var(--text-primary);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 24px;
+    text-align: center;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    width: calc(100% - var(--sidebar-width));
+    position: relative;
+}
+
+/* Header */
+.header {
+    height: var(--header-height);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.menu-toggle:hover {
+    background: var(--surface);
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+/* Botones - CORREGIDOS PARA SER 100% CLICKEABLES */
+.btn {
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Elementos dentro de botones NO bloquean clics */
+.btn i,
+.btn span {
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0077ed;
+}
+
+.btn-secondary {
+    background: var(--surface-light);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: var(--surface);
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--surface-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid transparent;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Iconos dentro de btn-icon NO bloquean clics */
+.btn-icon i {
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-icon:hover {
+    background: var(--surface);
+    border-color: var(--border);
+}
+
+/* Contenedor de contenido */
+.content-container {
+    padding: 24px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Dashboard Info */
+.dashboard-info {
+    background: var(--surface);
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.dashboard-info h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dashboard-info p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.stat-item {
+    background: var(--surface-dark);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    text-align: center;
+    min-width: 0;
+}
+
+.stat-item h3 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.stat-item p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+/* Secciones */
+.section {
+    background: var(--surface);
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.section-title i {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.section-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* API Cards */
+.api-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.api-card {
+    background: var(--surface-dark);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.api-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow);
+    border-color: var(--primary);
+}
+
+.api-method {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 1;
+}
+
+.method-get { background: rgba(10, 132, 255, 0.2); color: var(--primary); }
+.method-post { background: rgba(50, 215, 75, 0.2); color: var(--success); }
+.method-put { background: rgba(255, 159, 10, 0.2); color: var(--warning); }
+.method-delete { background: rgba(255, 69, 58, 0.2); color: var(--danger); }
+
+.api-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.api-name i {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.api-description {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    word-break: break-word;
+}
+
+.api-endpoint {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 12px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 13px;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    word-break: break-all;
+    border: 1px solid var(--border);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+/* Parámetros de API - INPUTS CORREGIDOS PARA PERMITIR ESCRITURA */
+.api-params {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+}
+
+.param-group {
+    margin-bottom: 12px;
+}
+
+.param-group:last-child {
+    margin-bottom: 0;
+}
+
+.param-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+    word-break: break-word;
+}
+
+.param-label span {
+    color: var(--danger);
+    margin-left: 2px;
+}
+
+.param-input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    transition: var(--transition);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+    touch-action: auto !important;
+}
+
+.param-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.param-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Botones de acción - CORREGIDOS PARA SER 100% CLICKEABLES */
+.api-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.api-actions .btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.api-actions .btn > * {
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+}
+
+/* Response Box */
+.response-box {
+    margin-top: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 13px;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.response-box.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.response-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.response-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.response-box::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+.response-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.response-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    flex: 1;
+    min-width: 0;
+}
+
+.response-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Formularios - INPUTS CORREGIDOS */
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--surface-dark);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    transition: var(--transition);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+    touch-action: auto !important;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.2);
+}
+
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+}
+
+/* Tablas */
+.table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+thead {
+    background: var(--surface-dark);
+}
+
+th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+    font-size: 14px;
+    word-break: break-word;
+}
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Autenticación - INPUTS CORREGIDOS */
+.auth-card {
+    background: var(--surface);
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    padding: 40px;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.auth-icon {
+    font-size: 48px;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.auth-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.auth-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--surface-dark);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 1px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+    touch-action: auto !important;
+}
+
+.auth-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Notificaciones */
+.notification {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--card-shadow);
+    z-index: 1000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    max-width: 400px;
+    width: calc(100% - 48px);
+}
+
+.notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification.success {
+    border-left: 4px solid var(--success);
+}
+
+.notification.error {
+    border-left: 4px solid var(--danger);
+}
+
+.notification.warning {
+    border-left: 4px solid var(--warning);
+}
+
+.notification i {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.notification.success i {
+    color: var(--success);
+}
+
+.notification.error i {
+    color: var(--danger);
+}
+
+.notification.warning i {
+    color: var(--warning);
+}
+
+/* Loader */
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    width: 100%;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--surface-light);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Animaciones */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Responsive - TABLET */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .api-cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+    }
+    
+    .content-container {
+        padding: 20px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .section-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .notification {
+        left: 24px;
+        right: 24px;
+        width: auto;
+        max-width: none;
+    }
+}
+
+/* Responsive - MOBILE */
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+    
+    .header {
+        padding: 0 16px;
+        height: 60px;
+    }
+    
+    .header-title {
+        font-size: 18px;
+    }
+    
+    .header-controls .btn span {
+        display: none;
+    }
+    
+    .header-controls .btn {
+        padding: 8px 12px;
+    }
+    
+    .content-container {
+        padding: 16px;
+    }
+    
+    .dashboard-info,
+    .section {
+        padding: 20px;
+        border-radius: 16px;
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .stat-item {
+        padding: 12px;
+    }
+    
+    .stat-item h3 {
+        font-size: 20px;
+    }
+    
+    .api-cards-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .api-card {
+        padding: 16px;
+    }
+    
+    .api-name {
+        font-size: 16px;
+    }
+    
+    .api-method {
+        top: 16px;
+        right: 16px;
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+    
+    .btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    
+    .btn-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .auth-card {
+        padding: 24px;
+        margin: 0 16px;
+    }
+    
+    .auth-icon {
+        font-size: 40px;
+    }
+    
+    .auth-title {
+        font-size: 22px;
+    }
+    
+    .table-container {
+        border-radius: 10px;
+    }
+    
+    th, td {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .response-box {
+        padding: 12px;
+        font-size: 12px;
+        max-height: 250px;
+    }
+}
+
+/* Responsive - MOBILE PEQUEÑO */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .section-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .api-actions {
+        flex-direction: column;
+    }
+    
+    .api-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .form-input,
+    .param-input,
+    .auth-input {
+        font-size: 16px !important; /* Evita zoom en iOS */
+    }
+    
+    .notification {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        padding: 14px;
+    }
+    
+    .sidebar {
+        width: 280px;
+    }
+}
+
+/* Responsive - DESKTOP GRANDE */
+@media (min-width: 1200px) {
+    .content-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .api-cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+/* Prevenir zoom en inputs en iOS */
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="password"],
+    textarea {
+        font-size: 16px !important;
+    }
+    
+    select,
+    button {
+        font-size: 16px;
+    }
+}
+
+/* Mejorar visibilidad del cursor en inputs */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+}
+
+/* Permitir escritura en inputs - CORRECCIÓN CLAVE */
+.param-input,
+.form-input,
+.auth-input,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"] {
+    -webkit-user-select: auto !important;
+    user-select: auto !important;
+    pointer-events: auto !important;
+    touch-action: auto !important;
+}
+
+/* Prevenir selección de texto en elementos interactivos */
+.btn,
+.btn-icon,
+.nav-link,
+.menu-toggle {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Asegurar que los botones sean 100% cliqueables */
+.btn *,
+.btn-icon * {
+    pointer-events: none;
+}
+
+/* Mejorar renderizado en dispositivos móviles */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Asegurar que las imágenes y videos no desborden */
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mejorar el scrolling en móviles */
+body {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Prevenir el pull-to-refresh en móviles */
+body {
+    overscroll-behavior-y: none;
+}
+
+/* CORRECCIÓN ESPECÍFICA: Asegurar que los inputs permitan escritura en iOS */
+@supports (-webkit-touch-callout: none) {
+    .param-input,
+    .form-input,
+    .auth-input {
+        font-size: 16px !important;
+        touch-action: auto !important;
+        -webkit-user-select: auto !important;
+        user-select: auto !important;
+    }
+}
+
+/* CORRECCIÓN ESPECÍFICA: Asegurar clics en todo el botón */
+.clickable-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background: transparent;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="logo-text">Hady APIs</div>
+            </div>
+            
+           <div style="
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 14px;
+  border-radius: 18px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 18px;
+">
+
+  <!-- HEADER (Avatar + Info) -->
+  <div style="display: flex; gap: 12px; align-items: flex-start;">
+
+    <!-- AVATAR -->
+    <div style="position: relative;">
+      <img src="profile.png"
+        style="
+          width: 46px;
+          height: 46px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid rgba(255,255,255,0.25);
+        ">
+
+      <!-- Online -->
+      <span style="
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 12px;
+        height: 12px;
+        background: #4cd964;
+        border-radius: 50%;
+        border: 2px solid #111;
+        box-shadow: 0 0 6px #4cd964;
+      "></span>
+    </div>
+
+    <!-- INFO -->
+    <div style="flex: 1;">
+
+      <!-- Nombre + Verificado -->
+      <div style="
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      ">
+        <span style="
+          font-size: 1rem;
+          font-weight: 700;
+          color: #fff;
+        ">Hady D'xyz</span>
+
+        <i class="fa-solid fa-circle-check" 
+           style="color:#1da1f2; font-size: 1rem;"></i>
+      </div>
+
+      <!-- Usuario -->
+      <span style="
+        color: #999;
+        font-size: 0.78rem;
+      ">@devhades02</span>
+
+      <!-- TAGS VIP + DEV (mismo lugar) -->
+      <div style="
+        display: flex;
+        gap: 6px;
+        margin-top: 6px;
+      ">
+
+        <span style="
+          background: #ffd000;
+          padding: 2px 8px;
+          border-radius: 8px;
+          font-size: 0.70rem;
+          font-weight: 700;
+          color: #000;
+        ">VIP</span>
+
+        <span style="
+          background: rgba(29,161,242,0.2);
+          color: #1da1f2;
+          padding: 2px 8px;
+          border-radius: 8px;
+          font-size: 0.70rem;
+          border: 1px solid rgba(29,161,242,0.3);
+          display:flex;
+          align-items:center;
+          gap:4px;
+        ">
+          <i class="fa-solid fa-code"></i> Developer
+        </span>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTONES SOCIALES -->
+  <div style="
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  ">
+
+    <a href="https://wa.me/51916150289" style="
+      background: rgba(255,255,255,0.07);
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    ">
+  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+</a>
+
+    <a href="https://github.com/devhades02" style="
+      background: rgba(255,255,255,0.07);
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    ">
+      <i class="fa-brands fa-github"></i> GitHub
+    </a>
+
+    <a href="api/status" style="
+      background: rgba(255,255,255,0.07);
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    ">
+      <i class="fa-solid fa-signal"></i>   Estado
+    </a>
+    
+    <a href="#" style="
+      background: rgba(255,255,255,0.07);
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    ">
+      <i class="fa-brands fa-youtube"></i> YouTube
+    </a>
+
+  </div>
+
+  <!-- TAGS con # debajo -->
+  <div style="
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  ">
+
+    <span style="
+      background: rgba(255,255,255,0.07);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+    ">#HadyAPIs</span>
+
+    <span style="
+      background: rgba(255,255,255,0.07);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+    ">#Seguridad</span>
+
+    <span style="
+      background: rgba(255,255,255,0.07);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+    ">#Proyectos</span>
+
+    <span style="
+      background: rgba(255,255,255,0.07);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+    ">#Perú</span>
+
+  </div>
+
+</div>
+            
+            <div class="system-info">
+                
+           
+           
+           
+           
+            </div>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="nav-title">Navegación</div>
+            <ul class="nav-items">
+                <li class="nav-item">
+                    <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                        <i class="fas fa-chart-bar"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#apis" class="nav-link" data-section="apis">
+                        <i class="fas fa-code"></i>
+                        Todas las APIs
+                        <span class="nav-badge" id="apis-count">0</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#documentation" class="nav-link" data-section="documentation">
+                        <i class="fas fa-book"></i>
+                        Documentación
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="nav-title">Herramientas</div>
+            <ul class="nav-items">
+                <li class="nav-item">
+                    <a href="#tester" class="nav-link" data-section="tester">
+                        <i class="fas fa-flask"></i>
+                        Probador de APIs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#settings" class="nav-link" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        Configuración
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="header-title" id="pageTitle">Dashboard</h1>
+            </div>
+            
+            <div class="header-controls">
+                <button class="btn btn-secondary" id="refreshBtn">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Refrescar</span>
+                </button>
+                <button class="btn-icon" id="themeToggle" title="Cambiar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Contenido dinámico -->
+        <div class="content-container" id="contentContainer">
+            <!-- Dashboard (sección inicial) -->
+            <div class="dashboard-info" id="dashboardSection">
+                <h2><i class="fas fa-rocket"></i> Bienvenido a Hady APIs</h2>
+                <p>Este es tu dashboard para gestionar y probar todas las APIs disponibles. Desde aquí puedes ver la información del sistema, probar endpoints y acceder a la documentación.</p>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-item">
+                        <h3 id="totalApis">0</h3>
+                        <p>APIs Totales</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="activeServices">1</h3>
+                        <p>Servicios Activos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="responseTime">0ms</h3>
+                        <p>Tiempo de Respuesta</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="uptime">100%</h3>
+                        <p>Disponibilidad</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fas fa-code"></i> APIs Disponibles</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="scanApis">
+                            <i class="fas fa-search"></i>
+                            Escanear APIs
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.open('/api/info', '_blank')">
+                            <i class="fas fa-external-link-alt"></i>
+                            Ver API Info
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="apisContainer">
+                    <div class="loader">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Otras secciones (ocultas inicialmente) -->
+            <div class="section" id="apisSection" style="display: none;">
+                <!-- Se llenará dinámicamente -->
+            </div>
+            
+            <div class="section" id="documentationSection" style="display: none;">
+                <!-- Se llenará dinámicamente -->
+            </div>
+            
+            <div class="section" id="testerSection" style="display: none;">
+                <!-- Se llenará dinámicamente -->
+            </div>
+            
+            <div class="section" id="settingsSection" style="display: none;">
+                <!-- Se llenará dinámicamente -->
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Notificación -->
+<div class="notification" id="notification">
+    <i class="fas fa-check-circle"></i>
+    <div>
+        <div class="notification-title">Notificación</div>
+        <div class="notification-message">Mensaje de notificación</div>
+    </div>
+</div>
+
+<script>
+// =======================
+// METADATA DE APIS CON PARÁMETROS
+// =======================
+const ENDPOINTS_METADATA = {
+    "/api/chatgpt": {
+        name: "ChatGPT",
+        icon: "fas fa-robot",
+        description: "Genera respuestas usando modelos GPT permitidos.",
+        method: "GET",
+        category: "IA",
+        example: "/api/chatgpt?model=gpt-4o-mini&msg=Hola",
+        params: [
+            {name: "model", type: "string", required: true, example: "gpt-4o-mini", description: "Modelo de GPT a utilizar"},
+            {name: "msg", type: "string", required: true, example: "Hola, explícame la física cuántica", description: "Mensaje para enviar al modelo"}
+        ]
+    },
+    "/api/translate": {
+        name: "Traductor",
+        icon: "fas fa-language",
+        description: "Traduce texto entre diferentes idiomas.",
+        method: "GET",
+        category: "Utilidades",
+        example: "/api/translate?text=Hello&target=es",
+        params: [
+            {name: "text", type: "string", required: true, example: "Hello world", description: "Texto a traducir"},
+            {name: "target", type: "string", required: true, example: "es", description: "Idioma destino (es, en, fr, etc.)"},
+            {name: "source", type: "string", required: false, example: "en", description: "Idioma origen (opcional)"}
+        ]
+    },
+    "/api/image": {
+        name: "Generador de Imágenes",
+        icon: "fas fa-image",
+        description: "Genera imágenes basadas en descripciones de texto.",
+        method: "GET",
+        category: "IA",
+        example: "/api/image?prompt=un gato astronauta",
+        params: [
+            {name: "prompt", type: "string", required: true, example: "un gato astronauta en el espacio", description: "Descripción de la imagen a generar"},
+            {name: "size", type: "string", required: false, example: "512x512", description: "Tamaño de la imagen (opcional)"},
+            {name: "style", type: "string", required: false, example: "realistic", description: "Estilo de la imagen (opcional)"}
+        ]
+    }
+};
+
+// =======================
+// CONFIGURACIÓN DE API
+// =======================
+const API_CONFIG = {
+    baseURL: window.location.origin,
+    endpoints: {
+        info: '/api/info',
+        endpoints: '/api/endpoints',
+        execute: (path) => path
+    },
+    // Configuración de autenticación
+    auth: {
+        required: true,
+        password: "hady123", // Cambia esta contraseña por la que desees
+        key: "HADY_API_KEY_2024" // Key alternativa
+    }
+};
+
+// =======================
+// FUNCIONES GLOBALES PARA BOTONES - CORREGIDAS
+// =======================
+function executeEndpointGlobal(path, method, endpointId = null) {
+    if (window.hadyUI && window.hadyUI.executeEndpoint) {
+        window.hadyUI.executeEndpoint(path, method, endpointId);
+    } else {
+        console.error('Hady UI no está disponible');
+        showGlobalNotification('Error: Interfaz no cargada', 'error');
+    }
+}
+
+function copyToClipboardGlobal(text) {
+    if (window.hadyUI && window.hadyUI.copyToClipboard) {
+        window.hadyUI.copyToClipboard(text);
+    } else {
+        // Fallback
+        navigator.clipboard.writeText(text).then(() => {
+            showGlobalNotification('Copiado al portapapeles', 'success');
+        }).catch(err => {
+            console.error('Error al copiar: ', err);
+        });
+    }
+}
+
+function openEndpointGlobal(path) {
+    const fullUrl = window.location.origin + path;
+    window.open(fullUrl, '_blank');
+}
+
+function showGlobalNotification(message, type = 'success') {
+    const notification = document.getElementById('notification');
+    if (!notification) return;
+    
+    const icon = notification.querySelector('i');
+    const title = notification.querySelector('.notification-title');
+    const messageEl = notification.querySelector('.notification-message');
+    
+    notification.className = `notification ${type}`;
+    icon.className = `fas fa-${
+        type === 'success' ? 'check-circle' :
+        type === 'error' ? 'exclamation-circle' :
+        type === 'warning' ? 'exclamation-triangle' : 'info-circle'
+    }`;
+    title.textContent = type === 'success' ? 'Éxito' : 
+                       type === 'error' ? 'Error' : 
+                       type === 'warning' ? 'Advertencia' : 'Información';
+    messageEl.textContent = message;
+    
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 5000);
+}
+
+// =======================
+// MANEJO DE INTERFAZ
+// =======================
+class HadyAPIUI {
+    constructor() {
+        this.currentSection = 'dashboard';
+        this.endpoints = [];
+        this.systemInfo = null;
+        this.isAuthenticated = sessionStorage.getItem('hady_authenticated') === 'true';
+        this.isMobile = this.checkIsMobile();
+        this.init();
+    }
+    
+    checkIsMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    }
+    
+    init() {
+        this.bindEvents();
+        this.setupViewport();
+        this.loadSystemInfo();
+        this.loadEndpoints();
+        this.setupSections();
+        this.setupTheme();
+        this.setupResponsive();
+    }
+    
+    setupViewport() {
+        // Prevenir zoom automático en iOS
+        document.addEventListener('touchstart', function() {}, {passive: true});
+        
+        // Ajustar viewport para iOS
+        if (this.isMobile) {
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+            }
+        }
+    }
+    
+    setupResponsive() {
+        // Ajustar sidebar en móviles
+        if (this.isMobile) {
+            document.getElementById('sidebar').classList.remove('show');
+        }
+        
+        // Escuchar cambios de tamaño
+        window.addEventListener('resize', this.handleResize.bind(this));
+        this.handleResize();
+    }
+    
+    handleResize() {
+        const isNowMobile = window.innerWidth <= 768;
+        
+        if (isNowMobile !== this.isMobile) {
+            this.isMobile = isNowMobile;
+            
+            // Ajustar sidebar en cambio de tamaño
+            if (this.isMobile) {
+                document.getElementById('sidebar').classList.remove('show');
+            } else {
+                document.getElementById('sidebar').classList.add('show');
+            }
+        }
+        
+        // Ajustar contenedor de contenido
+        this.adjustContentContainer();
+    }
+    
+    adjustContentContainer() {
+        const contentContainer = document.getElementById('contentContainer');
+        if (contentContainer) {
+            contentContainer.style.maxWidth = '100%';
+            contentContainer.style.overflowX = 'hidden';
+        }
+    }
+    
+    bindEvents() {
+        // Toggle del sidebar en móvil
+        document.getElementById('menuToggle').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('sidebar').classList.toggle('show');
+        });
+        
+        // Navegación
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = link.getAttribute('data-section');
+                this.showSection(section);
+                
+                // Cerrar sidebar en móvil
+                if (this.isMobile) {
+                    document.getElementById('sidebar').classList.remove('show');
+                }
+            });
+        });
+        
+        // Botón de refrescar
+        document.getElementById('refreshBtn').addEventListener('click', () => {
+            this.refreshAll();
+        });
+        
+        // Botón de tema
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            this.toggleTheme();
+        });
+        
+        // Botón de escanear APIs
+        document.getElementById('scanApis')?.addEventListener('click', () => {
+            this.scanAPIs();
+        });
+        
+        // Cerrar sidebar al hacer clic fuera en móvil
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.getElementById('menuToggle');
+            
+            if (this.isMobile && 
+                !sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target) &&
+                sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+            }
+        });
+        
+        // CORRECCIÓN: No prevenir comportamiento por defecto en inputs
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    }
+    
+    async loadSystemInfo() {
+        try {
+            const response = await fetch(API_CONFIG.endpoints.info);
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            const data = await response.json();
+            
+            this.systemInfo = data;
+            
+            
+            
+            
+            /*
+            document.getElementById('system-info-text').innerHTML = `
+                <strong>${data.project || 'Hady APIs'}</strong><br>
+                Creador: ${data.creator || 'Hady D\'xyz'}<br>
+                Estado: <span style="color: #32d74b;">● online</span><br>
+                Vip: <span style="color: #32d74b;"> Si</span><br>
+            `;
+            */
+            
+            
+            
+            document.getElementById('totalApis').textContent = data.endpoints || 0;
+            document.getElementById('responseTime').textContent = '142ms';
+            
+        } catch (error) {
+            console.error('Error cargando información del sistema:', error);
+            
+            
+            
+            
+            
+            /*
+            document.getElementById('system-info-text').innerHTML = `
+                <strong>Hady APIs</strong><br>
+                Creador: Hady D'xyz<br>
+                <span style="color: #ff453a;">● Error de conexión</span>
+            `;
+            */
+            
+            
+            
+            this.showNotification('No se pudo conectar al servidor API', 'error');
+        }
+    }
+    
+    async loadEndpoints() {
+        const container = document.getElementById('apisContainer');
+        
+        try {
+            const response = await fetch(API_CONFIG.endpoints.endpoints);
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            const data = await response.json();
+            
+            let endpoints = [];
+            if (Array.isArray(data)) {
+                endpoints = data;
+            } else if (data && data.endpoints && Array.isArray(data.endpoints)) {
+                endpoints = data.endpoints;
+            } else if (data && data.data && Array.isArray(data.data)) {
+                endpoints = data.data;
+            } else {
+                throw new Error('Formato de respuesta no reconocido');
+            }
+            
+            this.endpoints = endpoints;
+            
+            document.getElementById('apis-count').textContent = endpoints.length;
+            document.getElementById('totalApis').textContent = endpoints.length;
+            
+            this.renderEndpoints(endpoints, container);
+            
+        } catch (error) {
+            console.error('Error cargando endpoints:', error);
+            container.innerHTML = `
+                <div class="api-card" style="text-align: center; padding: 40px; grid-column: 1 / -1;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: var(--warning); margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 12px;">Error cargando APIs</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">${error.message}</p>
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <button class="btn btn-primary" onclick="hadyUI.loadEndpoints()">
+                            <i class="fas fa-sync-alt"></i>
+                            Reintentar
+                        </button>
+                        <button class="btn btn-secondary" onclick="hadyUI.showDemoData()">
+                            <i class="fas fa-eye"></i>
+                            Ver Datos de Demostración
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    }
+    
+    renderEndpoints(endpoints, container) {
+        if (endpoints.length === 0) {
+            container.innerHTML = `
+                <div class="api-card" style="text-align: center; padding: 40px; grid-column: 1 / -1;">
+                    <i class="fas fa-inbox" style="font-size: 48px; color: var(--text-tertiary); margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 12px;">No hay APIs disponibles</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">No se encontraron endpoints para mostrar.</p>
+                    <button class="btn btn-primary" onclick="hadyUI.scanAPIs()">
+                        <i class="fas fa-search"></i>
+                        Escanear APIs
+                    </button>
+                </div>
+            `;
+            return;
+        }
+        
+        let html = '<div class="api-cards-container">';
+        
+        endpoints.forEach(endpoint => {
+            const path = endpoint.path || '#';
+            const metadata = ENDPOINTS_METADATA[path] || {};
+            
+            const method = endpoint.method || metadata.method || 'GET';
+            const name = endpoint.name || metadata.name || 'Sin nombre';
+            const description = endpoint.description || metadata.description || 'Sin descripción';
+            const icon = endpoint.icon || metadata.icon || 'fas fa-code';
+            const category = endpoint.category || metadata.category || 'General';
+            const params = endpoint.params || metadata.params || [];
+            
+            const endpointId = `endpoint-${path.replace(/[^a-zA-Z0-9]/g, '-')}`;
+            
+            let paramsHtml = '';
+            if (params.length > 0) {
+                paramsHtml = '<div class="api-params">';
+                paramsHtml += '<div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; font-weight: 600;">Parámetros requeridos:</div>';
+                
+                params.forEach(param => {
+                    paramsHtml += `
+                        <div class="param-group">
+                            <label class="param-label">
+                                ${param.name} ${param.required ? '<span>*</span>' : ''}
+                                ${param.description ? `<div style="font-size: 12px; color: var(--text-tertiary); font-weight: normal; margin-top: 2px;">${param.description}</div>` : ''}
+                            </label>
+                            <input type="text" 
+                                   class="param-input" 
+                                   data-param="${param.name}" 
+                                   placeholder="${param.example || ''}" 
+                                   ${param.required ? 'required' : ''}
+                                   inputmode="text"
+                                   autocomplete="off">
+                        </div>
+                    `;
+                });
+                
+                paramsHtml += '</div>';
+            }
+            
+            html += `
+                <div class="api-card" id="${endpointId}">
+                    <span class="api-method method-${method.toLowerCase()}">${method}</span>
+                    
+                    <h3 class="api-name">
+                        <i class="${icon}"></i>
+                        ${name}
+                    </h3>
+                    
+                    <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 6px; font-size: 12px; margin-bottom: 8px;">
+                        ${category}
+                    </div>
+                    
+                    <p class="api-description">${description}</p>
+                    
+                    <div class="api-endpoint">
+                        <strong>Endpoint URL:</strong><br>
+                        <code>${API_CONFIG.baseURL}${path}</code>
+                    </div>
+                    
+                    ${paramsHtml}
+                    
+                    <div class="api-actions">
+                        <button class="btn btn-primary" onclick="executeEndpointGlobal('${path}', '${method}', '${endpointId}')">
+                            <i class="fas fa-play"></i>
+                            Probar API
+                        </button>
+                        <button class="btn btn-secondary" onclick="copyToClipboardGlobal('${API_CONFIG.baseURL}${path}')">
+                            <i class="fas fa-copy"></i>
+                            Copiar URL
+                        </button>
+                        <button class="btn btn-secondary" onclick="openEndpointGlobal('${path}')">
+                            <i class="fas fa-external-link-alt"></i>
+                            Abrir
+                        </button>
+                    </div>
+                                 
+                    <div class="response-box" id="response-${endpointId}"></div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        container.innerHTML = html;
+        
+        // CORRECCIÓN: Asegurar que los inputs sean escribibles
+        this.fixInputs();
+    }
+    
+    // CORRECCIÓN: Función para arreglar inputs
+    fixInputs() {
+        document.querySelectorAll('.param-input').forEach(input => {
+            // Remover cualquier atributo que impida escritura
+            input.style.pointerEvents = 'auto';
+            input.style.userSelect = 'auto';
+            input.style.webkitUserSelect = 'auto';
+            
+            // Permitir eventos de toque
+            input.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+            
+            input.addEventListener('touchend', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+            
+            input.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.focus();
+            });
+        });
+    }
+    
+    async executeEndpoint(path, method = "GET", endpointId = null) {
+        if (this.isMobile) {
+            document.activeElement?.blur();
+        }
+        
+        if (!endpointId) {
+            endpointId = `endpoint-${path.replace(/[^a-zA-Z0-9]/g, '-')}`;
+        }
+        
+        const responseBox = document.getElementById(`response-${endpointId}`);
+        const card = document.getElementById(endpointId);
+        
+        if (!responseBox || !card) {
+            this.showNotification('Error: No se pudo encontrar el endpoint', 'error');
+            return;
+        }
+        
+        // Verificar parámetros requeridos
+        const paramInputs = card.querySelectorAll('.param-input[required]');
+        let missingParams = [];
+        
+        paramInputs.forEach(input => {
+            if (!input.value.trim()) {
+                missingParams.push(input.getAttribute('data-param'));
+            }
+        });
+        
+        if (missingParams.length > 0) {
+            this.showNotification(`Faltan parámetros requeridos: ${missingParams.join(', ')}`, 'warning');
+            
+            paramInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = 'var(--danger)';
+                    input.style.boxShadow = '0 0 0 2px rgba(255, 69, 58, 0.2)';
+                    
+                    setTimeout(() => {
+                        input.style.borderColor = '';
+                        input.style.boxShadow = '';
+                    }, 3000);
+                }
+            });
+            return;
+        }
+        
+        // Construir URL con parámetros
+        let url = path;
+        const paramInputsAll = card.querySelectorAll('.param-input');
+        const params = {};
+        
+        paramInputsAll.forEach(input => {
+            const paramName = input.getAttribute('data-param');
+            const paramValue = input.value.trim();
+            
+            if (paramValue) {
+                params[paramName] = paramValue;
+            }
+        });
+        
+        if (Object.keys(params).length > 0) {
+            const queryString = new URLSearchParams(params).toString();
+            url += '?' + queryString;
+        }
+        
+        // Mostrar loading
+        responseBox.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--text-secondary);"><i class="fas fa-spinner fa-spin"></i> Procesando solicitud...</div>';
+        responseBox.classList.add('show');
+        
+        try {
+            const startTime = Date.now();
+            const options = {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            };
+            
+            const response = await fetch(url, options);
+            const endTime = Date.now();
+            const responseTime = endTime - startTime;
+            
+            let responseData;
+            try {
+                responseData = await response.json();
+            } catch {
+                responseData = { text: await response.text() };
+            }
+            
+            if (response.ok) {
+                const jsonStr = JSON.stringify(responseData, null, 2);
+                const formattedJson = this.syntaxHighlight(jsonStr);
+                
+                responseBox.innerHTML = `
+                    <div class="response-header">
+                        <div class="response-title">
+                            <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                            Respuesta exitosa (${responseTime}ms)
+                        </div>
+                        <div class="response-actions">
+                            <button class="btn-icon" onclick="hadyUI.copyToClipboard(JSON.stringify(${JSON.stringify(responseData)}, null, 2))">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="btn-icon" onclick="document.getElementById('response-${endpointId}').classList.remove('show')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <pre style="margin: 0; font-family: inherit;">${formattedJson}</pre>
+                `;
+                
+                this.showNotification(`Endpoint ejecutado correctamente (${responseTime}ms)`, 'success');
+            } else {
+                responseBox.innerHTML = `
+                    <div class="response-header">
+                        <div class="response-title">
+                            <i class="fas fa-exclamation-circle" style="color: var(--danger);"></i>
+                            Error ${response.status}: ${response.statusText}
+                        </div>
+                        <div class="response-actions">
+                            <button class="btn-icon" onclick="document.getElementById('response-${endpointId}').classList.remove('show')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <pre style="margin: 0; font-family: inherit; color: var(--danger);">${JSON.stringify(responseData, null, 2)}</pre>
+                `;
+                
+                this.showNotification(`Error ejecutando endpoint: ${response.status}`, 'error');
+            }
+        } catch (error) {
+            console.error('Error ejecutando endpoint:', error);
+            responseBox.innerHTML = `
+                <div class="response-header">
+                    <div class="response-title">
+                        <i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i>
+                        Error de conexión
+                    </div>
+                </div>
+                <div style="color: var(--warning); padding: 10px;">
+                    <strong>Error:</strong> ${error.message}<br><br>
+                    <strong>Solución:</strong><br>
+                    1. Verifica que el servidor esté corriendo<br>
+                    2. Verifica la URL del endpoint<br>
+                    3. Verifica tu conexión a internet
+                </div>
+            `;
+            
+            this.showNotification(`Error de conexión: ${error.message}`, 'error');
+        }
+    }
+    
+    syntaxHighlight(json) {
+        if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, 
+        function (match) {
+            let cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+    
+    showSection(sectionId) {
+        document.querySelectorAll('.section, .dashboard-info').forEach(section => {
+            section.style.display = 'none';
+        });
+        
+        if (sectionId === 'dashboard') {
+            document.getElementById('dashboardSection').style.display = 'block';
+            document.querySelectorAll('.section')[0].style.display = 'block';
+        } else {
+            document.getElementById(`${sectionId}Section`).style.display = 'block';
+        }
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-section') === sectionId) {
+                link.classList.add('active');
+            }
+        });
+        
+        const titleMap = {
+            'dashboard': 'Dashboard',
+            'apis': 'Todas las APIs',
+            'documentation': 'Documentación',
+            'tester': 'Probador de APIs',
+            'settings': 'Configuración'
+        };
+        
+        document.getElementById('pageTitle').textContent = titleMap[sectionId] || 'Dashboard';
+        
+        this.loadSectionContent(sectionId);
+        this.currentSection = sectionId;
+        this.adjustContentContainer();
+    }
+    
+    loadSectionContent(sectionId) {
+        switch(sectionId) {
+            case 'dashboard':
+                break;
+            case 'apis':
+                this.loadAllAPIs();
+                break;
+            case 'documentation':
+                this.loadDocumentation();
+                break;
+            case 'tester':
+                this.loadTester();
+                break;
+            case 'settings':
+                this.loadSettings();
+                break;
+        }
+    }
+    
+    async loadAllAPIs() {
+        const section = document.getElementById('apisSection');
+        section.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
+        
+        try {
+            if (this.endpoints.length > 0) {
+                this.renderAllAPIsTable(section);
+                return;
+            }
+            
+            const response = await fetch(API_CONFIG.endpoints.endpoints);
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            const data = await response.json();
+            
+            let endpoints = [];
+            if (Array.isArray(data)) {
+                endpoints = data;
+            } else if (data && data.endpoints && Array.isArray(data.endpoints)) {
+                endpoints = data.endpoints;
+            } else if (data && data.data && Array.isArray(data.data)) {
+                endpoints = data.data;
+            }
+            
+            this.endpoints = endpoints;
+            this.renderAllAPIsTable(section);
+            
+        } catch (error) {
+            section.innerHTML = `
+                <div class="api-card" style="text-align: center; padding: 40px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: var(--warning); margin-bottom: 20px;"></i>
+                    <h3>Error cargando APIs</h3>
+                    <p>${error.message}</p>
+                </div>
+            `;
+        }
+    }
+    
+    renderAllAPIsTable(section) {
+        let html = `
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-code"></i> Todas las APIs (${this.endpoints.length})</h2>
+                <div class="section-actions">
+                    <button class="btn btn-primary" onclick="hadyUI.exportAPIs()">
+                        <i class="fas fa-download"></i>
+                        Exportar JSON
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        if (this.endpoints.length === 0) {
+            html += `
+                <div class="api-card" style="text-align: center; padding: 40px;">
+                    <i class="fas fa-inbox" style="font-size: 48px; color: var(--text-tertiary); margin-bottom: 20px;"></i>
+                    <h3>No hay APIs disponibles</h3>
+                </div>
+            `;
+        } else {
+            html += `
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Método</th>
+                                <th>Endpoint</th>
+                                <th>Nombre</th>
+                                <th>Categoría</th>
+                                <th>Parámetros</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            this.endpoints.forEach(endpoint => {
+                const path = endpoint.path || '#';
+                const metadata = ENDPOINTS_METADATA[path] || {};
+                const method = endpoint.method || metadata.method || 'GET';
+                const name = endpoint.name || metadata.name || 'Sin nombre';
+                const category = endpoint.category || metadata.category || 'General';
+                const params = endpoint.params || metadata.params || [];
+                
+                html += `
+                    <tr>
+                        <td><span class="method-${method.toLowerCase()}">${method}</span></td>
+                        <td><code>${path}</code></td>
+                        <td>${name}</td>
+                        <td>${category}</td>
+                        <td>${params.length > 0 ? params.map(p => p.name).join(', ') : 'Ninguno'}</td>
+                        <td>
+                            <button class="btn-icon" onclick="executeEndpointGlobal('${path}', '${method}')" title="Probar">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="btn-icon" onclick="copyToClipboardGlobal('${API_CONFIG.baseURL}${path}')" title="Copiar">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="btn-icon" onclick="openEndpointGlobal('${path}')" title="Abrir">
+                                <i class="fas fa-external-link-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table></div>';
+        }
+        
+        section.innerHTML = html;
+    }
+    
+    loadDocumentation() {
+        const section = document.getElementById('documentationSection');
+        section.innerHTML = `
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-book"></i> Documentación de Hady APIs</h2>
+            </div>
+            
+            <div class="api-card">
+                <h3 class="api-name">
+                    <i class="fas fa-info-circle"></i>
+                    Cómo utilizar APIs con parámetros
+                </h3>
+                
+                <div class="api-description">
+                    <p>Algunas APIs requieren parámetros para funcionar correctamente. Aquí te explicamos cómo usarlas:</p>
+                    
+                    <h4 style="margin-top: 20px; color: var(--text-primary);">1. APIs con parámetros</h4>
+                    <p>Cuando una API requiere parámetros, verás una sección especial debajo del endpoint con campos para ingresar los valores requeridos.</p>
+                    
+                    <div class="api-params" style="margin: 20px 0; background: rgba(0,0,0,0.1);">
+                        <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; font-weight: 600;">Parámetros requeridos:</div>
+                        <div class="param-group">
+                            <label class="param-label">
+                                model <span>*</span>
+                                <div style="font-size: 12px; color: var(--text-tertiary); font-weight: normal; margin-top: 2px;">Modelo de GPT a utilizar</div>
+                            </label>
+                            <input type="text" class="param-input" placeholder="gpt-4o-mini" readonly style="background: var(--surface);">
+                        </div>
+                        <div class="param-group">
+                            <label class="param-label">
+                                msg <span>*</span>
+                                <div style="font-size: 12px; color: var(--text-tertiary); font-weight: normal; margin-top: 2px;">Mensaje para enviar al modelo</div>
+                            </label>
+                            <input type="text" class="param-input" placeholder="Hola, ¿cómo estás?" readonly style="background: var(--surface);">
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin-top: 20px; color: var(--text-primary);">2. Ejemplo: API de ChatGPT</h4>
+                    <p>La API de ChatGPT requiere dos parámetros:</p>
+                    <ul style="color: var(--text-secondary); margin-left: 20px; margin-bottom: 16px;">
+                        <li><strong>model</strong>: El modelo a utilizar (ej: gpt-4o-mini)</li>
+                        <li><strong>msg</strong>: El mensaje que quieres enviar al modelo</li>
+                    </ul>
+                    
+                    <div class="api-endpoint" style="margin-bottom: 16px;">
+                        <strong>URL completa con parámetros:</strong><br>
+                        <code>${API_CONFIG.baseURL}/api/chatgpt?model=gpt-4o-mini&msg=Hola, explícame la física cuántica</code>
+                    </div>
+                    
+                    <h4 style="margin-top: 20px; color: var(--text-primary);">3. Validación de parámetros</h4>
+                    <p>El sistema valida automáticamente que todos los parámetros requeridos estén completos antes de enviar la solicitud. Si falta algún parámetro, verás un mensaje de advertencia.</p>
+                </div>
+            </div>
+        `;
+    }
+    
+    loadTester() {
+        const section = document.getElementById('testerSection');
+        section.innerHTML = `
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-flask"></i> Probador de APIs Avanzado</h2>
+            </div>
+            
+            <div class="api-card">
+                <h3 class="api-name">
+                    <i class="fas fa-sliders-h"></i>
+                    Configurar Solicitud HTTP
+                </h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Método HTTP</label>
+                    <select class="form-input" id="testerMethod">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                        <option value="PATCH">PATCH</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">URL del Endpoint</label>
+                    <input type="text" class="form-input" id="testerUrl" placeholder="Ej: /api/info" value="/api/info">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Parámetros (JSON)</label>
+                    <textarea class="form-input form-textarea" id="testerParams" placeholder='{"model": "gpt-4o-mini", "msg": "Hola"}' rows="5"></textarea>
+                    <small style="color: var(--text-secondary);">Ingresa los parámetros en formato JSON</small>
+                </div>
+                
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn btn-primary" onclick="hadyUI.runTest()">
+                        <i class="fas fa-play"></i>
+                        Ejecutar Prueba
+                    </button>
+                    <button class="btn btn-secondary" onclick="hadyUI.clearTester()">
+                        <i class="fas fa-trash"></i>
+                        Limpiar
+                    </button>
+                </div>
+                
+                <div class="response-box" id="testerResponse" style="margin-top: 24px;"></div>
+            </div>
+        `;
+    }
+    
+    loadSettings() {
+        const section = document.getElementById('settingsSection');
+        
+        if (!this.isAuthenticated && API_CONFIG.auth.required) {
+            section.innerHTML = this.getAuthForm();
+            return;
+        }
+        
+        section.innerHTML = `
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-cog"></i> Configuración del Sistema</h2>
+                <div class="section-actions">
+                    <button class="btn btn-secondary" onclick="hadyUI.logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+            
+            <div class="api-card">
+                <h3 class="api-name">
+                    <i class="fas fa-sliders-h"></i>
+                    Ajustes Generales
+                </h3>
+                
+                <div class="form-group">
+                    <label class="form-label">URL Base del Sistema</label>
+                    <input type="text" class="form-input" value="${API_CONFIG.baseURL}" readonly>
+                    <small style="color: var(--text-secondary); display: block; margin-top: 4px;">URL base de todas las APIs</small>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Tema de Interfaz</label>
+                    <select class="form-input" id="themeSelect">
+                        <option value="dark">Oscuro (iOS Style)</option>
+                        <option value="light">Claro</option>
+                        <option value="auto">Automático</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="autoRefresh" checked>
+                        Auto-refrescar cada 30 segundos
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="showNotifications" checked>
+                        Mostrar notificaciones
+                    </label>
+                </div>
+                
+                <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border);">
+                    <h4 style="color: var(--text-primary); margin-bottom: 16px;">Información del Sistema</h4>
+                    <div style="background: var(--surface-dark); padding: 16px; border-radius: 10px; border: 1px solid var(--border);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: var(--text-secondary);">URL Base:</span>
+                            <code>${API_CONFIG.baseURL}</code>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: var(--text-secondary);">Endpoint Info:</span>
+                            <code>${API_CONFIG.endpoints.info}</code>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-secondary);">Endpoints:</span>
+                            <code>${API_CONFIG.endpoints.endpoints}</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 12px; margin-top: 32px;">
+                    <button class="btn btn-primary" onclick="hadyUI.saveSettings()">
+                        <i class="fas fa-save"></i>
+                        Guardar Cambios
+                    </button>
+                    <button class="btn btn-secondary" onclick="hadyUI.resetSettings()">
+                        <i class="fas fa-undo"></i>
+                        Restablecer
+                    </button>
+                    <button class="btn btn-secondary" onclick="hadyUI.clearCache()">
+                        <i class="fas fa-broom"></i>
+                        Limpiar Cache
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        this.loadSavedSettings();
+    }
+    
+    getAuthForm() {
+        return `
+            <div class="auth-card">
+                <div class="auth-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h2 class="auth-title">Acceso Restringido</h2>
+                <p class="auth-subtitle">Ingresa la contraseña o key para acceder a la configuración del sistema.</p>
+                
+                <input type="password" id="authPassword" class="auth-input" placeholder="Contraseña o Key" autocomplete="off">
+                
+                <div style="display: flex; gap: 12px; margin-top: 24px;">
+                    <button class="btn btn-primary" onclick="hadyUI.checkAuth()" style="flex: 1;">
+                        <i class="fas fa-unlock"></i>
+                        Ingresar
+                    </button>
+                    <button class="btn btn-secondary" onclick="hadyUI.showSection('dashboard')" style="flex: 1;">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    checkAuth() {
+        const passwordInput = document.getElementById('authPassword');
+        const enteredPassword = passwordInput.value.trim();
+        
+        if (!enteredPassword) {
+            this.showNotification('Por favor ingresa una contraseña', 'warning');
+            return;
+        }
+        
+        if (enteredPassword === API_CONFIG.auth.password || enteredPassword === API_CONFIG.auth.key) {
+            this.isAuthenticated = true;
+            sessionStorage.setItem('hady_authenticated', 'true');
+            this.showNotification('Autenticación exitosa', 'success');
+            this.loadSettings();
+        } else {
+            this.showNotification('Contraseña o key incorrecta', 'error');
+            passwordInput.style.borderColor = 'var(--danger)';
+            passwordInput.style.boxShadow = '0 0 0 2px rgba(255, 69, 58, 0.2)';
+            
+            setTimeout(() => {
+                passwordInput.style.borderColor = '';
+                passwordInput.style.boxShadow = '';
+            }, 2000);
+        }
+    }
+    
+    logout() {
+        this.isAuthenticated = false;
+        sessionStorage.removeItem('hady_authenticated');
+        this.showNotification('Sesión cerrada correctamente', 'success');
+        this.loadSettings();
+    }
+    
+    loadSavedSettings() {
+        const savedTheme = localStorage.getItem('hadyTheme') || 'dark';
+        document.getElementById('themeSelect').value = savedTheme;
+        
+        const autoRefresh = localStorage.getItem('hadyAutoRefresh') !== 'false';
+        document.getElementById('autoRefresh').checked = autoRefresh;
+        
+        const showNotifications = localStorage.getItem('hadyShowNotifications') !== 'false';
+        document.getElementById('showNotifications').checked = showNotifications;
+    }
+    
+    saveSettings() {
+        const theme = document.getElementById('themeSelect').value;
+        const autoRefresh = document.getElementById('autoRefresh').checked;
+        const showNotifications = document.getElementById('showNotifications').checked;
+        
+        localStorage.setItem('hadyTheme', theme);
+        localStorage.setItem('hadyAutoRefresh', autoRefresh);
+        localStorage.setItem('hadyShowNotifications', showNotifications);
+        
+        this.applyTheme(theme);
+        this.setupAutoRefresh(autoRefresh);
+        
+        this.showNotification('Configuración guardada correctamente', 'success');
+    }
+    
+    resetSettings() {
+        if (confirm('¿Restablecer configuración a valores predeterminados?')) {
+            localStorage.clear();
+            document.getElementById('themeSelect').value = 'dark';
+            document.getElementById('autoRefresh').checked = true;
+            document.getElementById('showNotifications').checked = true;
+            this.applyTheme('dark');
+            this.setupAutoRefresh(true);
+            this.showNotification('Configuración restablecida', 'success');
+        }
+    }
+    
+    clearCache() {
+        if (confirm('¿Limpiar caché y recargar la página?')) {
+            localStorage.removeItem('hadyEndpointsCache');
+            localStorage.removeItem('hadySystemInfoCache');
+            sessionStorage.removeItem('hady_authenticated');
+            location.reload();
+        }
+    }
+    
+    applyTheme(theme) {
+        if (theme === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+            document.getElementById('themeToggle').querySelector('i').className = 'fas fa-sun';
+            document.getElementById('themeToggle').title = 'Cambiar a modo oscuro';
+        } else {
+            document.body.removeAttribute('data-theme');
+            document.getElementById('themeToggle').querySelector('i').className = 'fas fa-moon';
+            document.getElementById('themeToggle').title = 'Cambiar a modo claro';
+        }
+    }
+    
+    setupAutoRefresh(enabled) {
+        if (this.autoRefreshInterval) {
+            clearInterval(this.autoRefreshInterval);
+        }
+        
+        if (enabled) {
+            this.autoRefreshInterval = setInterval(() => {
+                if (this.currentSection === 'dashboard') {
+                    this.loadSystemInfo();
+                    this.loadEndpoints();
+                }
+            }, 30000);
+        }
+    }
+    
+    setupTheme() {
+        const savedTheme = localStorage.getItem('hadyTheme') || 'dark';
+        this.applyTheme(savedTheme);
+        
+        const autoRefresh = localStorage.getItem('hadyAutoRefresh') !== 'false';
+        this.setupAutoRefresh(autoRefresh);
+    }
+    
+    toggleTheme() {
+        const currentTheme = document.body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        localStorage.setItem('hadyTheme', newTheme);
+        this.applyTheme(newTheme);
+        this.showNotification(`Modo ${newTheme === 'light' ? 'claro' : 'oscuro'} activado`, 'success');
+    }
+    
+    async copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            this.showNotification('Copiado al portapapeles', 'success');
+        } catch (error) {
+            console.error('Error copiando al portapapeles:', error);
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            this.showNotification('Copiado al portapapeles', 'success');
+        }
+    }
+    
+    async exportAPIs() {
+        if (this.endpoints.length === 0) {
+            this.showNotification('No hay APIs para exportar', 'warning');
+            return;
+        }
+        
+        const dataStr = JSON.stringify(this.endpoints, null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', 'hady-apis-endpoints.json');
+        linkElement.click();
+        
+        this.showNotification('APIs exportadas correctamente', 'success');
+    }
+    
+    async refreshAll() {
+        this.showNotification('Actualizando sistema...', 'info');
+        await this.loadSystemInfo();
+        await this.loadEndpoints();
+        this.showNotification('Sistema actualizado correctamente', 'success');
+    }
+    
+    async scanAPIs() {
+        this.showNotification('Escaneando nuevas APIs...', 'info');
+        
+        setTimeout(() => {
+            this.showNotification('Escaneo completado. Recargando endpoints...', 'success');
+            this.loadEndpoints();
+        }, 1500);
+    }
+    
+    showDemoData() {
+        const container = document.getElementById('apisContainer');
+        const demoEndpoints = [
+            {
+                path: "/api/chatgpt",
+                name: "ChatGPT",
+                description: "Genera respuestas usando modelos GPT permitidos.",
+                method: "GET",
+                category: "IA",
+                icon: "fas fa-robot"
+            },
+            {
+                path: "/api/info",
+                name: "Información del Sistema",
+                description: "Muestra información general del sistema y lista todos los endpoints detectados.",
+                method: "GET",
+                category: "Sistema",
+                icon: "fas fa-info-circle"
+            },
+            {
+                path: "/api/translate",
+                name: "Traductor",
+                description: "Traduce texto entre diferentes idiomas.",
+                method: "GET",
+                category: "Utilidades",
+                icon: "fas fa-language"
+            }
+        ];
+        
+        this.endpoints = demoEndpoints;
+        this.renderEndpoints(demoEndpoints, container);
+        document.getElementById('apis-count').textContent = demoEndpoints.length;
+        document.getElementById('totalApis').textContent = demoEndpoints.length;
+        
+        this.showNotification('Mostrando datos de demostración', 'warning');
+    }
+    
+    showNotification(message, type = 'success') {
+        const showNotifications = localStorage.getItem('hadyShowNotifications') !== 'false';
+        if (!showNotifications && type !== 'error') return;
+        
+        const notification = document.getElementById('notification');
+        const icon = notification.querySelector('i');
+        const title = notification.querySelector('.notification-title');
+        const messageEl = notification.querySelector('.notification-message');
+        
+        notification.className = `notification ${type}`;
+        icon.className = `fas fa-${
+            type === 'success' ? 'check-circle' :
+            type === 'error' ? 'exclamation-circle' :
+            type === 'warning' ? 'exclamation-triangle' : 'info-circle'
+        }`;
+        title.textContent = type === 'success' ? 'Éxito' : 
+                           type === 'error' ? 'Error' : 
+                           type === 'warning' ? 'Advertencia' : 'Información';
+        messageEl.textContent = message;
+        
+        notification.classList.add('show');
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 5000);
+    }
+    
+    setupSections() {
+        this.loadDocumentation();
+        this.loadTester();
+    }
+    
+    async runTest() {
+        const method = document.getElementById('testerMethod').value;
+        let url = document.getElementById('testerUrl').value;
+        const paramsText = document.getElementById('testerParams').value;
+        const headersText = document.getElementById('testerHeaders').value;
+        const responseBox = document.getElementById('testerResponse');
+        
+        if (!url) {
+            this.showNotification('Por favor, ingresa una URL', 'warning');
+            return;
+        }
+        
+        if (!url.startsWith('/')) {
+            url = '/' + url;
+        }
+        
+        responseBox.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--text-secondary);"><i class="fas fa-spinner fa-spin"></i> Ejecutando prueba...</div>';
+        responseBox.classList.add('show');
+        
+        try {
+            let params = {};
+            if (paramsText) {
+                try {
+                    params = JSON.parse(paramsText);
+                } catch (e) {
+                    this.showNotification('Error en el formato JSON de los parámetros', 'error');
+                    return;
+                }
+            }
+            
+            let fullUrl = url;
+            if (Object.keys(params).length > 0) {
+                const queryString = new URLSearchParams(params).toString();
+                fullUrl += '?' + queryString;
+            }
+            
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            };
+            
+            if (headersText) {
+                headersText.split('\n').forEach(line => {
+                    const [key, ...values] = line.split(':');
+                    if (key && values.length) {
+                        headers[key.trim()] = values.join(':').trim();
+                    }
+                });
+            }
+            
+            const startTime = Date.now();
+            const response = await fetch(fullUrl, {
+                method: method,
+                headers: headers
+            });
+            const endTime = Date.now();
+            const responseTime = endTime - startTime;
+            
+            let responseData;
+            try {
+                responseData = await response.json();
+            } catch {
+                responseData = { text: await response.text() };
+            }
+            
+            const jsonStr = JSON.stringify(responseData, null, 2);
+            const formattedJson = this.syntaxHighlight(jsonStr);
+            
+            responseBox.innerHTML = `
+                <div class="response-header">
+                    <div class="response-title">
+                        <i class="fas fa-${response.ok ? 'check-circle' : 'exclamation-circle'}" style="color: ${response.ok ? 'var(--success)' : 'var(--danger)'};"></i>
+                        ${response.status} ${response.statusText} (${responseTime}ms)
+                    </div>
+                    <div class="response-actions">
+                        <button class="btn-icon" onclick="hadyUI.copyToClipboard(JSON.stringify(${JSON.stringify(responseData)}, null, 2))">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="btn-icon" onclick="document.getElementById('testerResponse').classList.remove('show')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <pre style="margin: 0; font-family: inherit;">${formattedJson}</pre>
+            `;
+            
+            this.showNotification(`Prueba completada: ${response.status} ${response.statusText}`, response.ok ? 'success' : 'error');
+            
+        } catch (error) {
+            responseBox.innerHTML = `
+                <div class="response-header">
+                    <div class="response-title">
+                        <i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i>
+                        Error de conexión
+                    </div>
+                </div>
+                <div style="color: var(--warning); padding: 10px;">
+                    <strong>Error:</strong> ${error.message}<br><br>
+                    <strong>URL probada:</strong> ${url}<br>
+                    <strong>Método:</strong> ${method}
+                </div>
+            `;
+            
+            this.showNotification(`Error: ${error.message}`, 'error');
+        }
+    }
+    
+    clearTester() {
+        document.getElementById('testerUrl').value = '/api/info';
+        document.getElementById('testerParams').value = '';
+        document.getElementById('testerHeaders').value = '';
+        document.getElementById('testerResponse').innerHTML = '';
+        document.getElementById('testerResponse').classList.remove('show');
+    }
+}
+
+// =======================
+// INICIALIZACIÓN
+// =======================
+
+const hadyUI = new HadyAPIUI();
+window.hadyUI = hadyUI;
+
+document.getElementById('notification').addEventListener('click', function() {
+    this.classList.remove('show');
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash && ['dashboard', 'apis', 'documentation', 'tester', 'settings'].includes(hash)) {
+        hadyUI.showSection(hash);
+    }
+});
+
+const originalShowSection = hadyUI.showSection.bind(hadyUI);
+hadyUI.showSection = function(sectionId) {
+    originalShowSection(sectionId);
+    window.location.hash = sectionId;
+};
+
+document.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        if (e.target.id === 'authPassword') {
+            hadyUI.checkAuth();
+        }
+    }
+});
+
+// CORRECCIÓN: Permitir escritura en inputs
+document.addEventListener('touchstart', function(event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
+// CORRECCIÓN: Asegurar clics en botones
+document.addEventListener('click', function(e) {
+    // Si el clic fue en un icono dentro de un botón, disparar el clic del botón
+    if (e.target.tagName === 'I' && e.target.closest('.btn, .btn-icon')) {
+        const button = e.target.closest('.btn, .btn-icon');
+        if (button.onclick) {
+            button.onclick(e);
+        } else if (button.getAttribute('onclick')) {
+            try {
+                eval(button.getAttribute('onclick'));
+            } catch (error) {
+                console.error('Error ejecutando onclick:', error);
+            }
+        }
+    }
+});
+
+// CORRECCIÓN: Solución final para inputs en iOS
+if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    document.addEventListener('touchstart', function(e) {
+        if (e.target.classList.contains('param-input') || 
+            e.target.classList.contains('form-input') ||
+            e.target.classList.contains('auth-input')) {
+            e.target.focus();
+        }
+    }, { passive: true });
+}
+</script>
+</body>
+</html>
