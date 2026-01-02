@@ -55,12 +55,26 @@ audio{
 </div>
 
 <script>
-if("mediaSession" in navigator){
+if ("mediaSession" in navigator) {
+  // Metadatos del audio
   navigator.mediaSession.metadata = new MediaMetadata({
-    title:"Hady Audio",
-    artist:"DevHades02"
+    title: "Hips Don't Lie",
+    artist: "Shakira",
+    album: "Oral Fixation Vol. 2",
+    artwork: [
+      { src: "https://i.scdn.co/image/ab67616d0000b2731f52a6f81e0e5e0d45c8c7b5", sizes: "96x96", type: "image/png" },
+      { src: "https://i.scdn.co/image/ab67616d0000b2731f52a6f81e0e5e0d45c8c7b5", sizes: "128x128", type: "image/png" },
+      { src: "https://i.scdn.co/image/ab67616d0000b2731f52a6f81e0e5e0d45c8c7b5", sizes: "192x192", type: "image/png" },
+      { src: "https://i.scdn.co/image/ab67616d0000b2731f52a6f81e0e5e0d45c8c7b5", sizes: "512x512", type: "image/png" }
+    ]
   });
-}
+
+  // Botones de control
+  navigator.mediaSession.setActionHandler('play', () => audio.play());
+  navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', () => playPreviousTrack());
+  navigator.mediaSession.setActionHandler('nexttrack', () => playNextTrack());
+  }
 </script>
 
 </body>
