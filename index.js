@@ -119,6 +119,16 @@ app.get('/api/status', (req, res) => {
   });
 });
 
+
+
+app.get('/api/video', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'video.html'));
+});
+
+app.get('/api/audio', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'audio.html'));
+});
+
 // ================================
 // RUTA PRINCIPAL
 // ================================
