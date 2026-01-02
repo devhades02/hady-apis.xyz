@@ -25,6 +25,7 @@ body{
   padding:18px;
   box-shadow:0 30px 60px rgba(0,0,0,.6);
   text-align:center;
+  color:white;
 }
 .icon{
   font-size:28px;
@@ -40,6 +41,45 @@ body{
 }
 audio{
   width:100%;
+  margin-bottom:10px;
+}
+.progress-container{
+  width:100%;
+  height:6px;
+  background:rgba(255,255,255,0.2);
+  border-radius:3px;
+  cursor:pointer;
+  margin-bottom:10px;
+}
+.progress{
+  height:100%;
+  width:0%;
+  background:#ff2a68;
+  border-radius:3px;
+}
+.buttons{
+  display:flex;
+  justify-content:space-around;
+  margin-bottom:10px;
+}
+button{
+  background:rgba(255,255,255,0.1);
+  border:none;
+  color:white;
+  font-size:16px;
+  padding:8px 12px;
+  border-radius:50%;
+  cursor:pointer;
+  transition:0.2s;
+}
+button:hover{
+  background:rgba(255,255,255,0.3);
+}
+.notify-btn{
+  margin-top:8px;
+  padding:6px 12px;
+  border-radius:12px;
+  font-size:13px;
 }
 </style>
 </head>
@@ -49,32 +89,120 @@ audio{
 <div class="card">
   <div class="icon"><i class="fa-solid fa-headphones"></i></div>
   <div class="title">Hady Audio</div>
-  <audio controls>
-    <source src="/test.mp3" type="audio/mpeg">
-  </audio>
+
+  <audio id="audio" src="/test.mp3"></audio>
+
+  <div class="progress-container" id="progressContainer">
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <div class="buttons">
+    <button id="prev"><i class="fa-solid fa-backward"></i></button>
+    <button id="play"><i class="fa-solid fa-play"></i></button>
+    <button id="pause"><i class="fa-solid fa-pause"></i></button>
+    <button id="next"><i class="fa-solid fa-forward"></i></button>
+  </div>
+
+  <button class="notify-btn" id="notifyBtn">Mostrar Notificación</button>
 </div>
 
 <script>
-if ("mediaSession" in navigator) {
-  // Metadatos del audio
-  navigator.mediaSession.metadata = new MediaMetadata({
-    title: "Hips Don't Lie",
-    artist: "Shakira",
-    album: "Oral Fixation Vol. 2",
-    artwork: [
-      { src: "https://i.scdn.co/image/ab67616d0000b2731f52a6f81e0e5e0d45c8c7b5", sizes: "96x96", type: "image/png" },
-      { src: "https://i.scdn.co/image/ab67616d0000b2731f52a6f81e0e5e0d45c8c7b5", sizes: "128x128", type: "image/png" },
-      { src: "https://i.scdn.co/image/ab67616d0000b2731f52a6f81e0e5e0d45c8c7b5", sizes: "192x192", type: "image/png" },
-      { src: "https://i.scdn.co/image/ab67616d0000b2731f52a6f81e0e5e0d45c8c7b5", sizes: "512x512", type: "image/png" }
-    ]
-  });
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('play');
+const pauseBtn = document.getElementById('pause');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const progress = document.getElementById('progress');
+const progressContainer = document.getElementById('progressContainer');
+const notifyBtn = document.getElementById('notifyBtn');
 
-  // Botones de control
-  navigator.mediaSession.setActionHandler('play', () => audio.play());
-  navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-  navigator.mediaSession.setActionHandler('previoustrack', () => playPreviousTrack());
-  navigator.mediaSession.setActionHandler('nexttrack', () => playNextTrack());
+// Lista de canciones ejemplo (puedes agregar más)
+const tracks = [
+  {title:"Hips Don't Lie", artist:"Shakira", src:"/test.mp3", artwork:"https://i.pinimg.com/236x/0a/34/59/0a3459b9d9fa9b1a1a9e05d1d91a2a9e.jpg"},
+  {title:"Waka Waka", artist:"Shakira", src:"/test2.mp3", artwork:"https://i.pinimg.com/236x/3b/7e/7b/3b7e7b2e2a4b2e1e3e5c1a3f.jpg"}
+];
+let currentTrack = 0;
+
+// Función para cargar canción
+function loadTrack(index){
+  const track = tracks[index];
+  audio.src = track.src;
+  if("mediaSession" in navigator){
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: track.title,
+      artist: track.artist,
+      album: "Álbum",
+      artwork:[
+        {src: track.artwork, sizes:"96x96", type:"image/png"},
+        {src: track.artwork, sizes:"128x128", type:"image/png"},
+        {src: track.artwork, sizes:"192x192", type:"image/png"},
+        {src: track.artwork, sizes:"512x512", type:"image/png"},
+      ]
+    });
+
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', () => playPreviousTrack());
+    navigator.mediaSession.setActionHandler('nexttrack', () => playNextTrack());
   }
+}
+
+// Play/Pause botones
+playBtn.addEventListener('click', () => audio.play());
+pauseBtn.addEventListener('click', () => audio.pause());
+
+// Next/Prev
+function playNextTrack(){
+  currentTrack = (currentTrack + 1) % tracks.length;
+  loadTrack(currentTrack);
+  audio.play();
+}
+function playPreviousTrack(){
+  currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+  loadTrack(currentTrack);
+  audio.play();
+}
+
+nextBtn.addEventListener('click', playNextTrack);
+prevBtn.addEventListener('click', playPreviousTrack);
+
+// Actualizar barra de progreso
+audio.addEventListener('timeupdate', ()=>{
+  const percent = (audio.currentTime / audio.duration) * 100;
+  progress.style.width = percent + '%';
+  if("mediaSession" in navigator && navigator.mediaSession.setPositionState){
+    navigator.mediaSession.setPositionState({
+      duration: audio.duration,
+      playbackRate: audio.playbackRate,
+      position: audio.currentTime
+    });
+    navigator.mediaSession.playbackState = audio.paused ? "paused" : "playing";
+  }
+});
+
+// Hacer clic en barra de progreso para cambiar tiempo
+progressContainer.addEventListener('click', (e)=>{
+  const rect = progressContainer.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const percent = x / rect.width;
+  audio.currentTime = percent * audio.duration;
+});
+
+// Botón de notificación
+notifyBtn.addEventListener('click', ()=>{
+  if(Notification.permission !== "granted"){
+    Notification.requestPermission();
+  } else {
+    const track = tracks[currentTrack];
+    new Notification(track.title, {
+      body: track.artist,
+      icon: track.artwork
+    });
+  }
+});
+
+// Cargar primera canción
+loadTrack(currentTrack);
 </script>
 
 </body>
